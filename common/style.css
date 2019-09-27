@@ -1,0 +1,74 @@
+html{
+  font:62.5%/1 Meiryo;
+}
+
+body{
+  margin-top:50px;
+}
+
+h1,ul,li,p{
+  margin:0;
+  padding:0;
+}
+
+ul{
+  list-style:none;
+}
+
+/*
+img{
+  vertical-align:bottom;
+}
+*/
+
+.game__wrapper{
+  height:500px;
+  width:500px;
+  margin: auto auto;
+}
+
+.game__inner{
+/*background:bisque;*/
+margin-bottom:10px;
+height:500px;
+width:500px;
+overflow:hidden;
+position:relative;
+}
+
+
+
+
+#enemyA0,
+#enemyA1,
+#enemyA2 {
+  left:0;
+  top:0;
+  position:absolute;
+  z-index:-10;
+}
+
+/*背景*/
+#bgimg0 {
+  left:0;
+  top:0;
+  position:absolute;
+  z-index:-20;
+}
+
+#targetScope0 {
+  left:0;
+  top:0;
+  position:absolute;
+  z-index:0;
+}
+
+#explosion {
+  left:-500px;
+  top:-500px;
+  position:absolute;
+  z-index:-10;
+}
+
+
+
