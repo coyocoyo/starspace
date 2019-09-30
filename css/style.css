@@ -8,6 +8,15 @@ body{
   margin-top:50px;
 }
 
+.game__start {
+  margin-bottom:10px;
+  top: -500px;
+height:500px;
+width:500px;
+overflow:hidden;
+	margin: auto;
+	position: relative;
+}
 
 .game__wrapper{
   height:500px;
@@ -31,8 +40,6 @@ position:relative;
   width: 500px;
   height: 500px;
 }
-
-
 
 #enemyA0,
 #enemyA1,
@@ -105,10 +112,6 @@ position:relative;
 
 /* 　並べる　*/
 
-.game__start {
-	margin: auto;
-	position: relative;
-}
 
 .game__start .start1 {
 	display: block;
@@ -122,6 +125,7 @@ position:relative;
 }
 
 .game__over {
+  display: none;
 	margin: auto;
 	position: relative;
 }
