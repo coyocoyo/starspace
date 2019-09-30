@@ -6,21 +6,78 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>StarSpace</title>
-  <link rel="stylesheet" href="common/style.css">
+  <link rel="stylesheet" href="css/style.css">
 </head>
 
 <body>
+  <!-- 音源 -->
+
+  <!-- サンプル 自機の弾の発射音 -->
+  <audio preload="auto" id="soundShoot01">
+    <source src="./audio_files/sample_shot0.mp3 "></audio>
+  <audio preload="auto" id="soundShoot02">
+    <source src="./audio_files/sample_shot0.mp3"></audio>
+
+  <!--  自機からの攻撃が当たった時の音。撃墜したとは限らない。  -->
+  <audio preload="auto" id="soundHit">
+    <source src="./audio_files/sample_hit.mp3"></audio>
+
+  <!-- サンプル 敵機を撃墜した時の音。爆発音。-->
+  <audio preload="auto" id="soundDestroy">
+    <source src="./audio_files/sample_bomb0.mp3"></audio>
+
+  <!-- サンプル 自機がダメージを受けた時の音 -->
+  <audio preload="auto" id="soundDamaged">
+    <source src="./audio_files/sample_damaged.mp3"></audio>
+
+  <!-- BGMサンプル 12.7MB -->
+  <audio preload="auto" id="bgm1">
+    <source src="./audio_files/BGM1.mp3"></audio>
+
+  <!-- BGMサンプル 12.7MB エラーの元になってる気がしたので停止
+  <audio preload="auto"　id="bgm2"><source src="./audio_files/BGM2.mp3"></audio>
+  -->
+
+  <!-- BGMサンプル 12.7MB エラーの元になってる気がしたので停止
+  <audio preload="auto"　id="bgm3"><source src="./audio_files/BGM3.mp3"></audio>
+  -->
+
+
+
+
   <div class="game__wrapper">
     <div class="game__inner">
 
-      <img src="common/img/bgimg0.png" alt="" id="bgimg0">
-      <img src="common/img/sampleTarget.png" alt="" id="targetScope0">
+      <img src="img/cockpit-02.png" alt="" id="cockpit_01"><!-- 照準消したら変になりました・・・。照準のない画像が欲しいです。 -->
+      <img src="img/bgimg0.png" alt="" id="bgimg0">
+      <!-- <img src="img/bgimg1.png" alt="" id="bgimg1"> 失敗中 -->
+      <img src="img/sampleTarget.png" alt="" id="targetScope0"><!-- サンプルです。正方形なら大きさ自由 -->
 
-      <img src="common/img/UFO-01.png" alt="" id="enemyA0">
-      <img src="common/img/UFO-01.png" alt="" id="enemyA1">
-      <img src="common/img/UFO-01.png" alt="" id="enemyA2">
+      <img src="img/UFO-02.png" alt="" id="enemyA0"><!-- 画像は正方形である必要はないです。 -->
+      <img src="img/UFO-02.png" alt="" id="enemyA1"><!-- 大きさも自由。当たり判定のため、上下左右の余白は少ないほうがいいです。 -->
+      <img src="img/UFO-02.png" alt="" id="enemyA2"><!-- 攻撃力、耐久力を個別に設定するので、UFOも隕石も同じA。 -->
+      <img src="img/stone-01.png" alt="" id="enemyA3">
+      <img src="img/stone-01.png" alt="" id="enemyA4">
+      <img src="img/stone-01.png" alt="" id="enemyA5">
+      <img src="img/stone-01.png" alt="" id="enemyA6">
+      <img src="img/stone-01.png" alt="" id="enemyA7">
+      <img src="img/stone-01.png" alt="" id="enemyA8">
+      <img src="img/stone-01.png" alt="" id="enemyA9"><!-- 今のところ、10種類まで設定可能 -->
+      <!-- <img src="img/stone-01.png" alt="" id="enemyA10"> 時間があれば、ボスキャラを作りたいですね。 -->
 
-      <img src="comon/img/explosion.png" alt="" id="explosion">
+      <img src="img/sample_Hit.png" alt="" id="Hit">
+
+      <img src="img/sample_explosion.png" alt="" id="explosion0"><!-- 爆発画像も敵毎に個別設定する？ -->
+      <img src="img/sample_explosion.png" alt="" id="explosion1">
+      <img src="img/sample_explosion.png" alt="" id="explosion2">
+      <img src="img/sample_explosion.png" alt="" id="explosion3">
+      <img src="img/sample_explosion.png" alt="" id="explosion4">
+      <img src="img/sample_explosion.png" alt="" id="explosion5">
+      <img src="img/sample_explosion.png" alt="" id="explosion6">
+      <img src="img/sample_explosion.png" alt="" id="explosion7">
+      <img src="img/sample_explosion.png" alt="" id="explosion8">
+      <img src="img/sample_explosion.png" alt="" id="explosion9">
+
 
     </div>
   </div>
@@ -37,12 +94,10 @@
         </script>
     -->
 
-  <!--
-      <script src="common/js/functions.js"></script>
-        <script src="common/js/a.js"></script>
-      <script src="common/js/c.js"></script>
-      -->
-  <script src="common/functions.js"></script>
+  <script src="functions/functions.js"></script>
+  <script src="functions/mouseMove.js"></script>
+  <script src="functions/keyBoard.js"></script>
+  <script src="functions/audio.js"></script>
 
 </body>
 
