@@ -11,15 +11,21 @@
 
 <body>
 
+
   <!--ゲームスタート画面-->
-    <div class="game__start">
-        <img class="start1" src="common/img/title.jpg" alt="start1">
-        <img class="start2" src="common/img/title2.jpg" alt="start2"> 
-      </div>
+  <div class="game__start">
+    <img class="start1" src="common/img/title.jpg" alt="start1">
+    <img class="start2" src="common/img/title2.jpg" alt="start2">
+  </div>
 
   <!-- 音源 -->
 
+  <!-- BGMサンプル 12.7MB -->
+  <iframe src="https://raw.githubusercontent.com/anars/blank-audio/master/500-milliseconds-of-silence.mp3"
+    allow="autoplay" id="audio" style="display:none"></iframe>
 
+  <iframe src="audio_files/game play music.mp3" allow="autoplay" style="display:none" id="iframeAudio">
+  </iframe>
 
   <!-- サンプル 自機の弾の発射音 -->
   <audio preload="auto" id="soundShoot01">
@@ -39,7 +45,7 @@
   <audio preload="auto" id="soundDamaged">
     <source src="./audio_files/sample_damaged.mp3"></audio>
 
-  <!-- BGMサンプル 12.7MB -->
+
 
 
   <!-- BGMサンプル 12.7MB エラーの元になってる気がしたので停止
@@ -56,7 +62,7 @@
   <div class="game__wrapper">
     <div class="game__inner">
 
-      <img src="img/cockpit-02.png" alt="" id="cockpit_01"><!-- 照準消したら変になりました・・・。照準のない画像が欲しいです。 -->
+      <img src="img/cockpit-03-01.png" alt="" id="cockpit_01"><!-- 照準消したら変になりました・・・。照準のない画像が欲しいです。 -->
       <img src="img/bgimg0.png" alt="" id="bgimg0">
       <!-- <img src="img/bgimg1.png" alt="" id="bgimg1"> 失敗中 -->
       <img src="img/sampleTarget.png" alt="" id="targetScope0"><!-- サンプルです。正方形なら大きさ自由 -->
@@ -90,10 +96,10 @@
     </div>
   </div>
 
-<!--ゲームオーバー画面-->
-<div class="game__over">
+  <!--ゲームオーバー画面-->
+  <div class="game__over">
     <img class="over1" src="common/img/gameover.jpg" alt="over1">
-    <img class="over2" src="common/img/gameover2.jpg" alt="over2"> 
+    <img class="over2" src="common/img/gameover2.jpg" alt="over2">
   </div>
 
   <!--
@@ -106,6 +112,7 @@
   <script src="functions/mouseMove.js"></script>
   <script src="functions/keyBoard.js"></script>
   <script src="functions/audio.js"></script>
+
 
 </body>
 
