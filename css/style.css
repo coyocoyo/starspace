@@ -13,6 +13,7 @@ body{
   height:500px;
   width:500px;
   margin: auto auto;
+ 
 }
 
 .game__inner{
@@ -123,7 +124,8 @@ position:relative;
 
 .game__over {
 	margin: auto;
-	position: relative;
+  position: relative;
+ 
 }
 
 .game__over .over1 {
