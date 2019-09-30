@@ -72,6 +72,8 @@ document.addEventListener('DOMContentLoaded',
       } else if (e.key === 's') { // 開発用チートキー
 
         score += 1000; // スコアに1000加算
+        let elem = document.getElementById('score');
+        elem.textContent = 'Score : ' + score;
 
       } else if (e.key === ' ') {
         shoot();
@@ -89,7 +91,12 @@ document.addEventListener('DOMContentLoaded',
 
       } else if (e.key === 'Enter') { // 「Enter」 で敵機の拡大・攻撃スタート
 
-        scene = 10;
+        score = 0;
+        let elem = document.getElementById('score');
+        elem.textContent = 'Score : ' + score;
+        level = 1;
+        elem = document.getElementById('level');
+        elem.textContent = 'level : ' + level;
         firstE = 0;
         lastE = 3;
         setEnemies();

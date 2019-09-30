@@ -111,7 +111,7 @@
   
   let enemySpeed = 2;
 
-  let scene = 0;
+  let level = 1;
   // ゲームの段階を示す変数
   // ページロード直後 ＝ 0、
   // ゲーム開始直後を10、点数が上がると11,12,13,...
@@ -214,24 +214,36 @@ document.addEventListener('DOMContentLoaded',
   --------------------------------------------------------------------------------------*/
 
     /*---- スコアによる敵機の再配置 ----*/
-    if (score >= 1000 && scene === 10) {
-      scene = 11;
-      enemySpeed = 3;
+    if (score >= 1000 && level === 1) {
+      level = 2;
+      document.getElementById('level').textContent = 'level : ' + level;
+      enemySpeed = 4;
       firstE = 2;
       lastE = 5;
       setEnemies(); // 配置
       enemySizeup(); // 拡大開始
-    } else if (score >= 2000 && scene === 11) {
-      scene = 12;
-      enemySpeed = 4;
+    } else if (score >= 2000 && level === 2) {
+      level = 3;
+      document.getElementById('level').textContent = 'level : ' + level;
+      enemySpeed = 6;
       firstE = 3;
-      lastE = 6;
+      lastE = 7;
       setEnemies(); // 配置
       enemySizeup(); // 拡大開始
-    } else if (score >= 3000 && scene === 12) {
-      scene = 13;
-      enemySpeed = 5;
+    } else if (score >= 3000 && level === 3) {
+      level = 4;
+      document.getElementById('level').textContent = 'level : ' + level;
+      enemySpeed = 8;
       firstE = 6;
+      lastE = 10;
+      setEnemies(); // 配置
+      enemySizeup(); // 拡大開始
+    } else if (score >= 4000 && level === 4) {
+      level = 5;
+      document.getElementById('level').textContent = 'level : ' + level;
+      HTMLCanvasElement;
+      enemySpeed = 10;
+      firstE = 4;
       lastE = 10;
       setEnemies(); // 配置
       enemySizeup(); // 拡大開始
