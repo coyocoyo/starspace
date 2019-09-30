@@ -83,15 +83,33 @@ document.addEventListener('DOMContentLoaded',
 
 
     playBgm1 = function () {
-
-      let myDuration = audioOrVideo.duration
-      console.log(myDuration);
+      
       //document.querySelector('#bgm2').pause(); // 他を止める (機能しない エラーになる)
       //document.querySelector('#bgm3').pause(); // 他を止める (機能しない エラーになる)
       document.querySelector('#bgm1').volume = 1; // 0 ~ 1 で設定する。
       document.querySelector('#bgm1').currentTime = 0;
       document.querySelector('#bgm1').play();
+      
+   //videoオブジェクトの取得 ▼
+    var media = document.getElementById("mv");
+    var timer = setInterval(function(){
+    var movtime = media.duration ; 
+      var plytime = media.currentTime;
+      console.log(plytime);
+      if (plytime >= movtime) {
+      media.pause();
+      media.currentTime = 0;
+      media.play();
+      
+    000);
+  
+/長さと再生時間を取得する関数 ▼
+ment.addEventListener('click', function (ev) {
+  media.play();
+);
+  
       console.log('関数 playBgm1 が呼ばれました'); // ここまでは実行される
+      
 
 
     }
