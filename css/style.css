@@ -55,16 +55,7 @@ position:relative;
   top:-500px;
 }
 
-#explosion0,
-#explosion1,
-#explosion2,
-#explosion3,
-#explosion4,
-#explosion5,
-#explosion6,
-#explosion7,
-#explosion8,
-#explosion9 {
+#explosion {
   left:-500px;
   top:-500px;
   position:absolute;
