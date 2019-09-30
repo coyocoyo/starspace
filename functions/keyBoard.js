@@ -72,7 +72,6 @@ document.addEventListener('DOMContentLoaded',
       } else if (e.key === 's') { // 開発用チートキー
 
         score += 1000; // スコアに1000加算
-        console.log(score);
 
       } else if (e.key === ' ') {
         shoot();
@@ -90,12 +89,17 @@ document.addEventListener('DOMContentLoaded',
 
       } else if (e.key === 'Enter') { // 「Enter」 で敵機の拡大・攻撃スタート
 
-        scene = 10;
         firstE = 0;
         lastE = 3;
         setEnemies();
         enemySizeup();
-        playBgm1();
+        document.querySelector('.game__start').style.display = 'none';
+        document.querySelector('#cockpit_01').style.display = 'block';
+        document.querySelector('#bgimg0').style.display = 'block';
+
+
+
+        // playBgm1();
         // 配列０番～２番の敵を500x500フレーム内に呼び出して拡大モードにし、他は待機させておく関数
 
       } else if (e.key === '1') { // scrollrate の操作
@@ -108,28 +112,25 @@ document.addEventListener('DOMContentLoaded',
       } else if (e.key === '8') {
         //n = 1;
         //setBgimg(n); // 失敗中
-        playBgm1();
+        // playBgm1();
       } else if (e.key === '9') {
 
-        /*
         firstE = 2;
         lastE = 5;
         setEnemies(); // 配置
         enemySizeup(); // 拡大開始
+
         // 配列2番～4番の敵を500x500フレーム内に呼び出して拡大モードにし、他は待機させておく関数
-        */
 
         // bgm2 再生 (エラーの元になってる気がしたので停止中)
 
       } else if (e.key === '0') {
 
-        /*
         firstE = 3;
         lastE = 6;
         setEnemies(); // 配置
         enemySizeup(); // 拡大開始
         // 配列３番～５番の敵を500x500フレーム内に呼び出して拡大モードにし、他は待機させておく関数
-        */
 
         // playBgm3(); // bgm3 再生 (エラーの元になってる気がしたので停止中)
 
@@ -152,7 +153,6 @@ document.addEventListener('DOMContentLoaded',
       } // if文の閉じ
 
     }, false); // keyupイベントリスナーの閉じ
-
 
 
   }, false); // DOMCon... の閉じ
