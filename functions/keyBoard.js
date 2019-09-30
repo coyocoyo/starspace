@@ -93,7 +93,7 @@ document.addEventListener('DOMContentLoaded',
         lastE = 3;
         setEnemies();
         enemySizeup();
-<<<<<<< HEAD
+
         document.querySelector('.game__start').style.display = 'none';
         document.querySelector('#cockpit_01').style.display = 'block';
         document.querySelector('#bgimg0').style.display = 'block';
@@ -101,10 +101,9 @@ document.addEventListener('DOMContentLoaded',
 
 
         // playBgm1();
-=======
+
         playBgm1();
 
->>>>>>> 7284cd5bd67501a7f6eaeb2737f584493d901745
         // 配列０番～２番の敵を500x500フレーム内に呼び出して拡大モードにし、他は待機させておく関数
 
 
