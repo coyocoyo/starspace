@@ -199,11 +199,19 @@ document.addEventListener('DOMContentLoaded',
 
       // ダメージ判定部
       if (enemySizeA[i] >= 200) {
-        life -= eAttack[i];
-        soundDamaged(); // やられた時の音呼び出し
-        console.log('Life : ' +life);
-        document.querySelector('#life').textContent = 'Life：' + life;
-        popEnemyA(i);
+
+        if (life >= 0) {
+          life -= eAttack[i];
+          soundDamaged(); // やられた時の音呼び出し
+          console.log('Life : ' + life);
+          document.querySelector('#life').textContent = 'Life：' + life;
+          popEnemyA(i);
+          // for文用の i を引数にして敵のリポップ関数を呼び出し。機能してるっぽい。
+        } else {
+          document.querySelector('.game__wrapper').style.display = 'none';
+          document.querySelector('.game__over').style.display = 'block';
+        }
+
         // for文用の i を引数にして敵のリポップ関数を呼び出し。機能してるっぽい。
 
       } // if文の閉じ
