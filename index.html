@@ -7,6 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>StarSpace</title>
   <link rel="stylesheet" href="css/style.css">
+  <script type="audio/javascript" src="/functions/audio.js"></script>
 </head>
 
 <body>
@@ -34,15 +35,24 @@
   <audio preload="auto" id="soundDamaged">
     <source src="./audio_files/sample_damaged.mp3"></audio>
 
+  <!--game play bgm-->
+  <div style="display:none;">
+    <audio src="/audio_files/game play music.mp3" preload="auto" loop>
+  </div>
+  <audio preload="auto" id="bgm1">
+    <source src="audio_files/game play music.mp3" autoplay loop> </audio>
 
 
+
+  <!--start -->
 
   <!--<BGMサンプル 12.7MB エラーの元になってる気がしたので停止-->
   <!-- <audio preload="auto" 　id="bgm2">
     <source src="/audio_files/game play music.mp3"></audio>
     -->
 
-  <!-- BGMサンプル 12.7MB エラーの元になってる気がしたので停止
+  <!-- BGMサンプル 12.7MB
+     エラーの元になってる気がしたので停止
   <audio preload="auto"　id="bgm3"><source src="./audio_files/BGM3.mp3"></audio>
   -->
 
