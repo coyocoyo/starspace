@@ -225,8 +225,8 @@ document.addEventListener('DOMContentLoaded',
               console.log(score);
               document.querySelector('#score').textContent = 'Score：' + score + '点';
               // 爆発画像を持ってくる
-              explosionX = (enemyAX[i] + enemySizeA[i] / 4); // その時の敵機の座標 - ザックリ調整
-              explosionY = (enemyAY[i] + enemySizeA[i] / 4); // その時の敵機の座標 - ザックリ調整
+              explosionX = (enemyAX[i] - enemySizeA[i] / 2); // その時の敵機の座標 - ザックリ調整
+              explosionY = (enemyAY[i] - enemySizeA[i] / 2); // その時の敵機の座標 - ザックリ調整
               popEnemyA(i); // i の値をそのまま引数にしてpopEnemy呼び出し
               explosion = document.querySelector('#explosion');
               explosion.style.left = explosionX + 'px';
