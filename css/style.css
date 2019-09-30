@@ -27,6 +27,7 @@ overflow:hidden;
   height:500px;
   width:500px;
   margin: auto auto;
+ 
 }
 
 .game__inner{
@@ -67,16 +68,7 @@ position:relative;
   top:-500px;
 }
 
-#explosion0,
-#explosion1,
-#explosion2,
-#explosion3,
-#explosion4,
-#explosion5,
-#explosion6,
-#explosion7,
-#explosion8,
-#explosion9 {
+#explosion {
   left:-500px;
   top:-500px;
   position:absolute;
@@ -134,7 +126,8 @@ position:relative;
 .game__over {
   display: none;
 	margin: auto;
-	position: relative;
+  position: relative;
+ 
 }
 
 .game__over .over1 {
