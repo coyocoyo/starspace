@@ -147,7 +147,7 @@ let scene = 0;
   let enemySizeA = []; // 各敵の大きさを入れておく。 function.js と mouseMove.js で使ってる。
 
   //-------  関数の窓口 -----------
-  let enemySizeup;
+let enemySizeup;
   // keyboard.js から呼び出されるため、
   // グローバルで名前だけ宣言しておく。
   // 本体は下のほう ↓↓
