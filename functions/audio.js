@@ -84,14 +84,13 @@ document.addEventListener('DOMContentLoaded',
 
     playBgm1 = function () {
 
-      let myDuration = audioOrVideo.duration
-      console.log(myDuration);
       //document.querySelector('#bgm2').pause(); // 他を止める (機能しない エラーになる)
       //document.querySelector('#bgm3').pause(); // 他を止める (機能しない エラーになる)
       document.querySelector('#bgm1').volume = 1; // 0 ~ 1 で設定する。
       document.querySelector('#bgm1').currentTime = 0;
       document.querySelector('#bgm1').play();
       console.log('関数 playBgm1 が呼ばれました'); // ここまでは実行される
+
 
 
     }
