@@ -223,6 +223,7 @@ document.addEventListener('DOMContentLoaded',
               soundDestroy(); // 爆発音呼び出し
               score += eScore[i];
               console.log(score);
+              document.querySelector('#score').textContent = 'Score：' + score + '点';
               // 爆発画像を持ってくる
               explosionX = (enemyAX[i] + enemySizeA[i] / 4); // その時の敵機の座標 - ザックリ調整
               explosionY = (enemyAY[i] + enemySizeA[i] / 4); // その時の敵機の座標 - ザックリ調整

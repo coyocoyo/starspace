@@ -19,6 +19,8 @@
 
   <!-- 音源 -->
 
+
+
   <!-- サンプル 自機の弾の発射音 -->
   <audio preload="auto" id="soundShoot01">
     <source src="./audio_files/sample_shot0.mp3 "></audio>
@@ -38,8 +40,7 @@
     <source src="./audio_files/sample_damaged.mp3"></audio>
 
   <!-- BGMサンプル 12.7MB -->
-  <audio preload="auto" id="bgm1">
-    <source src="./audio_files/BGM1.mp3"></audio>
+
 
   <!-- BGMサンプル 12.7MB エラーの元になってる気がしたので停止
   <audio preload="auto"　id="bgm2"><source src="./audio_files/BGM2.mp3"></audio>
@@ -85,8 +86,14 @@
       <img src="img/sample_explosion.png" alt="" id="explosion8">
       <img src="img/sample_explosion.png" alt="" id="explosion9">
 
+      <ul class="game__list">
+        <li id="score" class="game__item">Score：0点</li>
+        <li id="level" class="game__item">Level：1</li>
+        <li id="life" class="game__item">Life: 100</li>
+
 
     </div>
+
   </div>
 
 <!--ゲームオーバー画面-->
@@ -94,6 +101,7 @@
     <img class="over1" src="common/img/gameover.jpg" alt="over1">
     <img class="over2" src="common/img/gameover2.jpg" alt="over2"> 
   </div>
+
 
   <!--
       <script src="https://code.jquery.com/jquery-3.4.1.min.js"
