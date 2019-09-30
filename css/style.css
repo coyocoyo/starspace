@@ -1,3 +1,5 @@
+@charset "UTF-8";
+
 html{
   font:62.5%/1 Meiryo;
 }
@@ -6,20 +8,6 @@ body{
   margin-top:50px;
 }
 
-h1,ul,li,p{
-  margin:0;
-  padding:0;
-}
-
-ul{
-  list-style:none;
-}
-
-/*
-img{
-  vertical-align:bottom;
-}
-*/
 
 .game__wrapper{
   height:500px;
@@ -28,7 +16,6 @@ img{
 }
 
 .game__inner{
-/*background:bisque;*/
 margin-bottom:10px;
 height:500px;
 width:500px;
@@ -116,6 +103,83 @@ position:relative;
 }
 
 
+/* 　並べる　*/
+
+.game__start {
+	margin: auto;
+	position: relative;
+}
+
+.game__start .start1 {
+	display: block;
+	margin: 0 auto;
+}
+
+.game__start .start2 {
+	position: absolute;
+	top: 0;
+	left: 0%;
+}
+
+.game__over {
+	margin: auto;
+	position: relative;
+}
+
+.game__over .over1 {
+	display: block;
+	margin: 0 auto;
+}
+
+.game__over .over2 {
+	position: absolute;
+	top: 0;
+	left: 0%;
+}
+
+/*  keyframs  */
+
+@keyframes game__start {
+	0%{
+    opacity: 1;
+  }
+	50% {
+		opacity: 1;
+	}
+
+}
+
+.game__start img {
+	animation-name: game__start;
+	animation-duration: 5s;
+	animation-iteration-count: infinite;
+	opacity: 0;
+}
+
+.game__start .start2 {
+	animation-delay: 2s;
+}
+
+@keyframes game__over {
+	0%{
+    opacity: 1;
+  }
+	50% {
+		opacity: 1;
+	}
+
+}
+
+.game__over img {
+	animation-name: game__over;
+	animation-duration: 5s;
+	animation-iteration-count: infinite;
+	opacity: 0;
+}
+
+.game__over .over2 {
+	animation-delay: 2s;
+}
 
 
 
