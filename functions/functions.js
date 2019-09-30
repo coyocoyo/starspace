@@ -218,24 +218,24 @@ document.addEventListener('DOMContentLoaded',
       level = 2;
       document.getElementById('level').textContent = 'level : ' + level;
       enemySpeed = 4;
-      firstE = 2;
-      lastE = 5;
+      firstE = 0;
+      lastE = 4;
       setEnemies(); // 配置
       enemySizeup(); // 拡大開始
     } else if (score >= 2000 && level === 2) {
       level = 3;
       document.getElementById('level').textContent = 'level : ' + level;
       enemySpeed = 6;
-      firstE = 3;
-      lastE = 7;
+      firstE = 1;
+      lastE = 5;
       setEnemies(); // 配置
       enemySizeup(); // 拡大開始
     } else if (score >= 3000 && level === 3) {
       level = 4;
       document.getElementById('level').textContent = 'level : ' + level;
       enemySpeed = 8;
-      firstE = 6;
-      lastE = 10;
+      firstE = 2;
+      lastE = 6;
       setEnemies(); // 配置
       enemySizeup(); // 拡大開始
     } else if (score >= 4000 && level === 4) {
