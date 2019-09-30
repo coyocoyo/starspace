@@ -108,13 +108,15 @@
   // 開発中にフレームの寸法が変わったなら、ここを合わせて変更する。
 
   let life = 100;// 自機のHP
+  
+  let enemySpeed = 2;
 
-let scene = 0;
-// ゲームの段階を示す変数
-// ページロード直後 ＝ 0、
-// ゲーム開始直後を10、点数が上がると11,12,13,...
-// ゲームクリア ＝ 30、
-// ゲームオーバー ＝ 40、をイメージ
+  let scene = 0;
+  // ゲームの段階を示す変数
+  // ページロード直後 ＝ 0、
+  // ゲーム開始直後を10、点数が上がると11,12,13,...
+  // ゲームクリア ＝ 30、
+  // ゲームオーバー ＝ 40、をイメージ
 
   const addY = 70;
   // 照準は画面中央よりやや高め。
@@ -187,7 +189,7 @@ document.addEventListener('DOMContentLoaded',
 
       // 拡大処理
       if (enemySizeA[i] < 200) {
-        enemySizeA[i] += 2;
+        enemySizeA[i] += enemySpeed;
         //console.log(enemySize[i]); // 25 「敵の初期配置」のときに一律20にしてあるので。
         enemyA[i].style.width = enemySizeA[i] + "px"; // 拡大はする
         enemyA[i].style.height = enemySizeA[i]/(enemyA[i].naturalWidth/enemyA[i].naturalHeight) + "px"; // 拡大はする
@@ -207,21 +209,37 @@ document.addEventListener('DOMContentLoaded',
       } // if文の閉じ
     } // for文の閉じ
 
+ /*--------------------------------------------------------------------------------------
+  要調整部分　スコアによる敵機再配置　どれくらいがゲームとしてちょうどいいのか
+  --------------------------------------------------------------------------------------*/
+
     /*---- スコアによる敵機の再配置 ----*/
     if (score >= 1000 && scene === 10) {
       scene = 11;
+      enemySpeed = 3;
       firstE = 2;
       lastE = 5;
       setEnemies(); // 配置
       enemySizeup(); // 拡大開始
     } else if (score >= 2000 && scene === 11) {
       scene = 12;
+      enemySpeed = 4;
       firstE = 3;
       lastE = 6;
       setEnemies(); // 配置
       enemySizeup(); // 拡大開始
+    } else if (score >= 3000 && scene === 12) {
+      scene = 13;
+      enemySpeed = 5;
+      firstE = 6;
+      lastE = 10;
+      setEnemies(); // 配置
+      enemySizeup(); // 拡大開始
     }
-    /*---- なんとなくこの場所 ----*/
+ /*--------------------------------------------------------------------------------------
+ 　　　　　　　　　　　　　　なんとなくここに置いた 
+ -----------------------------------------------------------------------------------*/
+
 
     timer2 = setTimeout(enemySizeup, 200);
     // console.log('関数enemySizeupが呼び出されました');

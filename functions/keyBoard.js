@@ -89,6 +89,7 @@ document.addEventListener('DOMContentLoaded',
 
       } else if (e.key === 'Enter') { // 「Enter」 で敵機の拡大・攻撃スタート
 
+        scene = 10;
         firstE = 0;
         lastE = 3;
         setEnemies();
