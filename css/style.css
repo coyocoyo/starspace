@@ -8,7 +8,7 @@ body{
   margin-top:50px;
 }
 
-li {
+.game__item {
   display: none;
 
 }
@@ -27,7 +27,6 @@ overflow:hidden;
   height:500px;
   width:500px;
   margin: auto auto;
- 
 }
 
 .game__inner{
