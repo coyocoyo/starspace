@@ -58,7 +58,7 @@ document.addEventListener('DOMContentLoaded',
     let stopper2 = 0; // 命中画像の動き制御。 初期値 0
     let timer2; // マウスクリックの当たり判定処理で使ってる。 1000ミリ秒に爆発を消す。
 
-    let explosion = []; // 要素取得用
+    let explosion; // 要素取得用
     let explosionX = -500; // 爆発画像の x 座標　初期値-500
     let explosionY = -500; // 爆発画像の y 座標 初期値-500
     let stopper1 = 0;
@@ -157,11 +157,11 @@ document.addEventListener('DOMContentLoaded',
 
           // 爆発も一緒になって動く。が、普段は動かない。
           if (bgimgX !== 0 && bgimgX !== (frameWidth - bgimg.width)) {
-            document.querySelector('#explosion' + i).style.left = (explosionX += diffX * scrollrate * stopper1) + 'px';
+            document.querySelector('#explosion').style.left = (explosionX += diffX * scrollrate * stopper1) + 'px';
           }
 
           if (bgimgY !== 0 && bgimgY !== (frameHeight - bgimg.height)) {
-            document.querySelector('#explosion' + i).style.top = (explosionY += diffY * scrollrate * stopper1) + 'px';
+            document.querySelector('#explosion').style.top = (explosionY += diffY * scrollrate * stopper1) + 'px';
           }
 
 
@@ -228,11 +228,11 @@ document.addEventListener('DOMContentLoaded',
               explosionX = (enemyAX[i] + enemySizeA[i] / 4); // その時の敵機の座標 - ザックリ調整
               explosionY = (enemyAY[i] + enemySizeA[i] / 4); // その時の敵機の座標 - ザックリ調整
               popEnemyA(i); // i の値をそのまま引数にしてpopEnemy呼び出し
-              explosion[i] = document.querySelector('#explosion' + i);
-              explosion[i].style.left = explosionX + 'px';
-              explosion[i].style.top = explosionY + 'px';
+              explosion = document.querySelector('#explosion');
+              explosion.style.left = explosionX + 'px';
+              explosion.style.top = explosionY + 'px';
               stopper1 = 1; // この時だけ爆発も動く
-              timer1 = setTimeout(remove1(i), 1000); // 1秒後に remove() へ
+              timer1 = setTimeout(remove1, 1000); // 1秒後に remove() へ
 
             } // if文の閉じ
 
@@ -240,14 +240,7 @@ document.addEventListener('DOMContentLoaded',
         } // x座標の当たり処理の閉じ。 xで外れてるならここにくる
       } // for文の閉じ
 
-      function remove1(i) {
-        stopper1 = 0; // 爆発を動かなくする
-        explosionX = -500; // 画面外に逃がす
-        explosionY = -500; // 画面外に逃がす
-        explosion[i] = document.querySelector('#explosion' + i);
-        explosion[i].style.left = explosionX + 'px';
-        explosion[i].style.top = explosionY + 'px';
-      } // remove1 の閉じ
+
     } // shoot() の閉じ
 
     /*--------------------------
@@ -277,6 +270,14 @@ document.addEventListener('DOMContentLoaded',
 
     /*----爆発画像を待機位置に移す
      -------*/
+    function remove1() {
+      stopper1 = 0; // 爆発を動かなくする
+      explosionX = -500; // 画面外に逃がす
+      explosionY = -500; // 画面外に逃がす
+      explosion = document.querySelector('#explosion');
+      explosion.style.left = explosionX + 'px';
+      explosion.style.top = explosionY + 'px';
+    } // remove1 の閉じ
 
     /*-----
   --------*/
