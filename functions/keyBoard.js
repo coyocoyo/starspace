@@ -72,6 +72,7 @@ document.addEventListener('DOMContentLoaded',
       } else if (e.key === 's') { // 開発用チートキー
 
         score += 1000; // スコアに1000加算
+        console.log(score);
 
       } else if (e.key === ' ') {
         shoot();
@@ -89,6 +90,7 @@ document.addEventListener('DOMContentLoaded',
 
       } else if (e.key === 'Enter') { // 「Enter」 で敵機の拡大・攻撃スタート
 
+        scene = 10;
         firstE = 0;
         lastE = 3;
         setEnemies();
@@ -109,21 +111,25 @@ document.addEventListener('DOMContentLoaded',
         playBgm1();
       } else if (e.key === '9') {
 
+        /*
         firstE = 2;
         lastE = 5;
         setEnemies(); // 配置
         enemySizeup(); // 拡大開始
         // 配列2番～4番の敵を500x500フレーム内に呼び出して拡大モードにし、他は待機させておく関数
+        */
 
         // bgm2 再生 (エラーの元になってる気がしたので停止中)
 
       } else if (e.key === '0') {
 
+        /*
         firstE = 3;
         lastE = 6;
         setEnemies(); // 配置
         enemySizeup(); // 拡大開始
         // 配列３番～５番の敵を500x500フレーム内に呼び出して拡大モードにし、他は待機させておく関数
+        */
 
         // playBgm3(); // bgm3 再生 (エラーの元になってる気がしたので停止中)
 

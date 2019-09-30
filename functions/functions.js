@@ -98,9 +98,6 @@
   // 敵機の最大数 (htmlに設置した id の数)
   // Bタイプはないです。
 
-
-
-
   /*-- その他、微調整用変数 --*/
 
   const frameHeight = 500; //px フレームの縦の長さ
@@ -111,6 +108,13 @@
   // 開発中にフレームの寸法が変わったなら、ここを合わせて変更する。
 
   let life = 100;// 自機のHP
+
+let scene = 0;
+// ゲームの段階を示す変数
+// ページロード直後 ＝ 0、
+// ゲーム開始直後を10、点数が上がると11,12,13,...
+// ゲームクリア ＝ 30、
+// ゲームオーバー ＝ 40、をイメージ
 
   const addY = 70;
   // 照準は画面中央よりやや高め。
@@ -202,6 +206,23 @@ document.addEventListener('DOMContentLoaded',
 
       } // if文の閉じ
     } // for文の閉じ
+
+    /*---- スコアによる敵機の再配置 ----*/
+    if (score >= 1000 && scene === 10) {
+      scene = 11;
+      firstE = 2;
+      lastE = 5;
+      setEnemies(); // 配置
+      enemySizeup(); // 拡大開始
+    } else if (score >= 2000 && scene === 11) {
+      scene = 12;
+      firstE = 3;
+      lastE = 6;
+      setEnemies(); // 配置
+      enemySizeup(); // 拡大開始
+    }
+    /*---- なんとなくこの場所 ----*/
+
     timer2 = setTimeout(enemySizeup, 200);
     // console.log('関数enemySizeupが呼び出されました');
     // こいつが元凶だった・・・。
@@ -218,6 +239,11 @@ document.addEventListener('DOMContentLoaded',
     ローカル作業スペース
 
   --------------------*/
+    
+
+
+
+    
 
 
 }, false); // DOMCon... の閉じ
