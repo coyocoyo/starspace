@@ -196,7 +196,7 @@ document.addEventListener('DOMContentLoaded',
         life -= eAttack[i];
         soundDamaged(); // やられた時の音呼び出し
         console.log('Life : ' +life);
-        // document.querySelector('#life').textContent = '残りHP：' + life;
+        document.querySelector('#life').textContent = '残りHP：' + life;
         popEnemyA(i);
         // for文用の i を引数にして敵のリポップ関数を呼び出し。機能してるっぽい。
 
@@ -206,7 +206,7 @@ document.addEventListener('DOMContentLoaded',
     // console.log('関数enemySizeupが呼び出されました');
     // こいつが元凶だった・・・。
     //setInterval なら繰り返し処理なので、処理の閉じカッコ 「 } 」 の後に配置するべき。
-    // setTimeout は１回きりなので、全部の処理が終わる直前に入れる。 
+    // setTimeout は１回きりなので、全部の処理が終わる直前に入れる。
 
   } // enemySizeup の閉じ
   // timer2 = setInterval(enemySizeup, 200);
