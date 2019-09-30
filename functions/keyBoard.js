@@ -95,12 +95,7 @@ document.addEventListener('DOMContentLoaded',
         enemySizeup();
         playBgm1();
         // 配列０番～２番の敵を500x500フレーム内に呼び出して拡大モードにし、他は待機させておく関数
-        function setLoop($loop) {
-          var $elementReference = document.getElementById("sample");
-          $elementReference.loop = $loop;
-          var $loop = $elementReference.loop;
-          document.getElementById("gamePlayMusic").innerHTML = $loop;
-        }
+
       } else if (e.key === '1') { // scrollrate の操作
         scrollrate = 0.2;
       } else if (e.key === '2') {
