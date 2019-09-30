@@ -97,6 +97,10 @@ document.addEventListener('DOMContentLoaded',
         document.querySelector('.game__start').style.display = 'none';
         document.querySelector('#cockpit_01').style.display = 'block';
         document.querySelector('#bgimg0').style.display = 'block';
+        document.querySelector('#score').style.display = 'block';
+        document.querySelector('#level').style.display = 'block';
+        document.querySelector('#life').style.display = 'block';
+
 
 
 
