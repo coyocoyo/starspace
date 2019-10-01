@@ -14,7 +14,18 @@ body{
 
 .game__start {
   margin-bottom:10px;
-  top: -500px;
+  top: 0px;
+  height:500px;
+  width:500px;
+  overflow:hidden;
+	margin: auto;
+  position: relative;
+  z-index: 10;
+}
+
+.game__over{
+  margin-bottom:10px;
+  top: -50px;
   height:500px;
   width:500px;
   overflow:hidden;

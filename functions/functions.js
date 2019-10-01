@@ -209,7 +209,7 @@ document.addEventListener('DOMContentLoaded',
           popEnemyA(i);
           // for文用の i を引数にして敵のリポップ関数を呼び出し。機能してるっぽい。
         } else {
-          document.querySelector('.game__wrapper').style.display = 'none';
+          
           document.querySelector('.game__over').style.display = 'block';
           document.querySelector('#life').style.display = 'none';
           document.querySelector('#bgm1').pause();
