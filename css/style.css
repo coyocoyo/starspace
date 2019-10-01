@@ -149,7 +149,9 @@ position:relative;
   z-index:-10;
 }
 
-
+#operation img{
+  width: 500px;
+}
 /* 　並べる　*/
 
 
