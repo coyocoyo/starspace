@@ -212,13 +212,7 @@ document.addEventListener('DOMContentLoaded',
           // for文用の i を引数にして敵のリポップ関数を呼び出し。機能してるっぽい。
         } else {
           //document.querySelector('.game__wrapper').style.display = 'none';
-<<<<<<< HEAD
-          //document.querySelector('.game__over').style.display = 'block';
-=======
           document.querySelector('.game__over').style.display = 'block';
-          document.querySelector('#score').style.display = 'none';
-          document.querySelector('#level').style.display = 'none';
->>>>>>> d705d69b2299f9698b20c21332853be97d81b18c
           document.querySelector('#life').style.display = 'none';
           document.querySelector('#cockpit_01').style.display = 'none';
           document.querySelector('#bgimg0').style.display = 'none';
@@ -228,7 +222,7 @@ document.addEventListener('DOMContentLoaded',
           document.querySelector('#bgm2').play();
           firstE = 0;
           lastE = 0;
-          setEnemy();// mouseMove.js の関数
+          setEnemies();// mouseMove.js の関数
 
           enemyA[0] = document.querySelector('#enemyA' + 0);
           enemyA[0].style.left = -500 + 'px';
