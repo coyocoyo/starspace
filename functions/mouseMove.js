@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded',
       beforeX = e.screenX;
       beforeY = e.screenY;
 
-      setTimeout(function () { // 20ミリ秒に実行
+      setTimeout(function () { // 20ミリ秒後に実行
 
         // マウスイベントが起きた瞬間から20ミリ秒後のカーソルの座標を取得
         afterX = e.screenX;
