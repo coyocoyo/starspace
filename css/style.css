@@ -1,11 +1,15 @@
 @charset "UTF-8";
 
 html{
-  font:62.5%/1 Meiryo;
+  font:72.5%/1 Meiryo;
 }
 
 body{
   margin-top:50px;
+}
+
+ul{
+  color: lawngreen;
 }
 
 .game__item {
@@ -137,7 +141,7 @@ position:relative;
 .game__over .over2 {
 	position: absolute;
 	top: 0;
-	left: 0%;
+	left: 310px;
 }
 
 /*  keyframs  */
