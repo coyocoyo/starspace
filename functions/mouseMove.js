@@ -13,6 +13,7 @@ let setEnemies; // keyBoard.jsからの呼び出しあり
 let setTarget;
 let setBgimg; // keyBoard.jsからのテスト呼び出し → 停止中
 let shoot;
+let removeEnemy;
 // 他のjsファイルからの関数呼び出しリクエストを受け止めるために
 // ローカルにある関数の'名前だけ'グローバルで宣言しておく。
 
@@ -263,7 +264,7 @@ document.addEventListener('DOMContentLoaded',
 
     /*---使わない敵機を待機位置に移す
      ----*/
-    function removeEnemy(i) {
+    removeEnemy = (i) => {
       enemyA[i] = document.querySelector('#enemyA' + i);
       enemyA[i].style.left = -500 + 'px';
       enemyA[i].style.top = -500 + 'px';
