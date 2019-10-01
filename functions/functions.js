@@ -224,7 +224,7 @@ document.addEventListener('DOMContentLoaded',
           document.querySelector('#bgm1').pause();
           bgm1.currentTime = 0;
           document.querySelector('#bgm2').play();
-          document.querySelector('#result').innerHTML = '最終スコア：' + score;
+          document.querySelector('#result').innerHTML = '最終スコア：' +score;
           firstE = 0;
           lastE = 0;
           setEnemies();// mouseMove.js の関数
