@@ -26,7 +26,7 @@ body{
 .game__over{
   display: none;
   margin-bottom:10px;
-  top: -52px;
+  top: 0px;
   height:500px;
   width:500px;
   overflow:hidden;
@@ -147,12 +147,6 @@ position:relative;
 	top: 0;
 	left: 0%;
 }
-
-/*.game__over {
-  display: none;
-	margin: auto;
-  position: relative;
-}*/
 
 .game__over .over1 {
 	display: block;
