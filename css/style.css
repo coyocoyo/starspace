@@ -8,23 +8,43 @@ body{
   margin-top:50px;
 }
 
-ul{
-  color: lawngreen;
-}
-
 .game__item {
   display: none;
-
 }
 
 .game__start {
   margin-bottom:10px;
-  top: -500px;
+  top: 0px;
   height:500px;
   width:500px;
   overflow:hidden;
 	margin: auto;
-	position: relative;
+  position: relative;
+  z-index: 10;
+}
+
+.game__over{
+  margin-bottom:10px;
+  top: -50px;
+  height:500px;
+  width:500px;
+  overflow:hidden;
+	margin: auto;
+  position: relative;
+  z-index: 10;
+}
+
+ul{
+  color: lawngreen;
+}
+
+ul li{
+  margin-bottom: 10px;
+  top: 410px;
+  height: 10px;
+width: 100px;
+position: relative;
+  z-index: 9;
 }
 
 .game__wrapper{
@@ -49,6 +69,7 @@ position:relative;
   z-index:10;
   width: 500px;
   height: 500px;
+  z-index: 5;
 }
 
 #enemyA0,
