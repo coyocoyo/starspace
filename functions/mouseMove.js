@@ -398,7 +398,7 @@ document.addEventListener('DOMContentLoaded',
    ----------------*/
     // n = 0; // 失敗中
     setBgimg(); // 1回のページリロードにつき1回だけの処理 id=bgimg0 の背景画像を呼び出している。
-    setTarget(); // 1回のページリロードにつき1回だけの処理
+    //setTarget(); // 1回のページリロードにつき1回だけの処理
     // setEnemies(); // 敵機の初期配置のために１回呼び出しておく。
 
   }, false); // DOMCon... の閉じ

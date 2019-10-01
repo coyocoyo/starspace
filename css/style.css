@@ -98,8 +98,8 @@ position:relative;
 
 /* 照準 */
 #targetScope0 {
-  left:0;
-  top:0;
+  left:-500px;
+  top:-500px;
   position:absolute;
   z-index:0;
 }
