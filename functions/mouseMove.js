@@ -182,8 +182,9 @@ document.addEventListener('DOMContentLoaded',
     /*--------------------------
              当たり判定
     --------------------------*/
-
-    shoot = function () {
+    //
+    //shoot = function(){ // この形は通る
+    shoot = () => { // アロー関数
 
       soundShoot(); // 弾発射音呼び出し　サンプルはちょっと耳障り
 
