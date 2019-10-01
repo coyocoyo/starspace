@@ -109,6 +109,7 @@ document.addEventListener('DOMContentLoaded',
         document.querySelector('#score').style.display = 'block';
         document.querySelector('#level').style.display = 'block';
         document.querySelector('#life').style.display = 'block';
+        document.querySelector('#targetScope0').style.display = 'block';
         document.querySelector('.game__wrapper').style.display = 'block';
         document.querySelector('.game__over').style.display = 'none';
         document.querySelector('#bgm2').pause();

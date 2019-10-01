@@ -213,7 +213,12 @@ document.addEventListener('DOMContentLoaded',
         } else {
           //document.querySelector('.game__wrapper').style.display = 'none';
           document.querySelector('.game__over').style.display = 'block';
+          document.querySelector('#score').style.display = 'none';
+          document.querySelector('#level').style.display = 'none';
           document.querySelector('#life').style.display = 'none';
+          document.querySelector('#cockpit_01').style.display = 'none';
+          document.querySelector('#bgimg0').style.display = 'none';
+          document.querySelector('#targetScope0').style.display = 'none';
           document.querySelector('#bgm1').pause();
           bgm1.currentTime = 0;
           document.querySelector('#bgm2').play();
