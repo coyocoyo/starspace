@@ -149,8 +149,10 @@ position:relative;
   z-index:-10;
 }
 
-#operation img{
-  width: 500px;
+.operation {
+  left: 250px;
+  top: 570px;
+  position: absolute;
 }
 /* 　並べる　*/
 
