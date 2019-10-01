@@ -10,6 +10,7 @@
 ---------------------------*/
 let popEnemyA; // function.js から呼び出されてる
 let setEnemies; // keyBoard.jsからの呼び出しあり
+let setTarget;
 let setBgimg; // keyBoard.jsからのテスト呼び出し → 停止中
 let shoot;
 // 他のjsファイルからの関数呼び出しリクエストを受け止めるために
@@ -365,7 +366,7 @@ document.addEventListener('DOMContentLoaded',
         真ん中のやや上に配置する
            １リロードに１回
     ----------------------------*/
-    function setTarget() {
+    setTarget = () => {
       target0 = new Image();
       target0.src = document.getElementById('targetScope' + 0).src;
       //console.log(target0.height); // 照準画像の縦幅
@@ -398,8 +399,8 @@ document.addEventListener('DOMContentLoaded',
    ----------------*/
     // n = 0; // 失敗中
     setBgimg(); // 1回のページリロードにつき1回だけの処理 id=bgimg0 の背景画像を呼び出している。
-    setTarget(); // 1回のページリロードにつき1回だけの処理
-    setEnemies(); // 敵機の初期配置のために１回呼び出しておく。
+    //setTarget(); // 1回のページリロードにつき1回だけの処理
+    // setEnemies(); // 敵機の初期配置のために１回呼び出しておく。
 
   }, false); // DOMCon... の閉じ
 
@@ -427,6 +428,22 @@ console.log(eRealLife[4]);
 ------------------------*/
 
 
+/*
+[ マウスカーソルの座標ではなく、その移動量を取得したい。]
+
+マウスムーブイベント発生(わずかでも動いたらイベントが発生する)
+↓
+発生した瞬間のマウスカーソルの座標取得
+document.onmousemove = function (e) {
+e.screenX; (x座標の数値)
+e.screenY; (y座標の数値)
+}
+↓
+
+
+
+
+*/
 
 
 

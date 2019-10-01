@@ -15,9 +15,9 @@ body{
 .game__start {
   margin-bottom:10px;
   top: -500px;
-height:500px;
-width:500px;
-overflow:hidden;
+  height:500px;
+  width:500px;
+  overflow:hidden;
 	margin: auto;
   position: relative;
   z-index: 10;
@@ -108,8 +108,8 @@ position:relative;
 
 /* 照準 */
 #targetScope0 {
-  left:0;
-  top:0;
+  left:-500px;
+  top:-500px;
   position:absolute;
   z-index:0;
 }

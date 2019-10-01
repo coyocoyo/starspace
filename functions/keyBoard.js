@@ -99,6 +99,7 @@ document.addEventListener('DOMContentLoaded',
         elem.textContent = 'level : ' + level;
         firstE = 0;
         lastE = 3;
+        setTarget();
         setEnemies();
         enemySizeup();
 
