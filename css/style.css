@@ -24,8 +24,9 @@ body{
 }
 
 .game__over{
+  display: none;
   margin-bottom:10px;
-  top: -50px;
+  top: -52px;
   height:500px;
   width:500px;
   overflow:hidden;
@@ -147,12 +148,11 @@ position:relative;
 	left: 0%;
 }
 
-.game__over {
+/*.game__over {
   display: none;
 	margin: auto;
   position: relative;
- 
-}
+}*/
 
 .game__over .over1 {
 	display: block;
@@ -162,7 +162,7 @@ position:relative;
 .game__over .over2 {
 	position: absolute;
 	top: 0;
-	left: 310px;
+	left: 0px;
 }
 
 /*  keyframs  */
