@@ -13,8 +13,8 @@ let soundDestroy; // 敵機の爆発音
 
 let soundDamaged; // 攻撃を受けた時の音
 
-let playBgm1;
-// let playBgm2; (エラーの元になってる気がしたので停止中)
+let playBgm1;   //play中のbgm
+// let playBgm2; (エラーの元になってる気がしたので停止中)   //game overのbgm
 // let playBgm3; (エラーの元になってる気がしたので停止中)
 
 
@@ -91,6 +91,7 @@ document.addEventListener('DOMContentLoaded',
       document.querySelector('#bgm1').currentTime = 0;
       document.querySelector('#bgm1').play();
       console.log('関数 playBgm1 が呼ばれました'); // ここまでは実行される
+<<<<<<< HEAD
 
     }
 
@@ -107,16 +108,31 @@ document.addEventListener('DOMContentLoaded',
       }
     
     
+=======
+    }
+
+    /*
+        playBgm2 = function () {
+          console.log('関数 playBgm2 が呼ばれました'); // ここまでは実行される
+          //document.querySelector('#bgm1').pause(); // 他を止める (機能しない エラーになる)
+          //document.querySelector('#bgm3').pause(); // 他を止める (機能しない エラーになる)
+          document.querySelector('#bgm2').volume = 0.8; // 0 ~ 1 で設定する。
+          document.querySelector('#bgm2').currentTime = 0;
+          document.querySelector('#bgm2').play();
+        }
+>>>>>>> df52f104e17e76e25dc9d08c9ccce82c610288dd
     
-      playBgm3 = function() {
-        console.log('関数 playBgm3 が呼ばれました'); // ここまでは実行される
-        //document.querySelector('#bgm1').pause(); // 他を止める (機能しない エラーになる)
-        //document.querySelector('#bgm2').pause(); // 他を止める (機能しない エラーになる)
-        document.querySelector('#bgm3').volume = 0.8; // 0 ~ 1 で設定する。
-        document.querySelector('#bgm3').currentTime = 0;
-        document.querySelector('#bgm3').play();
-      }
-    */
+        
+        
+          playBgm3 = function() {
+            console.log('関数 playBgm3 が呼ばれました'); // ここまでは実行される
+            //document.querySelector('#bgm1').pause(); // 他を止める (機能しない エラーになる)
+            //document.querySelector('#bgm2').pause(); // 他を止める (機能しない エラーになる)
+            document.querySelector('#bgm3').volume = 0.8; // 0 ~ 1 で設定する。
+            document.querySelector('#bgm3').currentTime = 0;
+            document.querySelector('#bgm3').play();
+          }
+        */
 
 
 
