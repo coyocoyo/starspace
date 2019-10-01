@@ -39,6 +39,18 @@ body{
   z-index: 10;
 }
 
+#result{
+margin-bottom: 10px;
+top: 460px;
+left: 165px;
+height: 10px;
+width: 200px;
+color: white;
+font-size: 20px;
+position: absolute;
+z-index: 9;
+}
+
 ul{
   color: lawngreen;
 }
@@ -137,7 +149,11 @@ position:relative;
   z-index:-10;
 }
 
-
+.operation {
+  
+  top: 550px;
+  position: absolute;
+}
 /* 　並べる　*/
 
 
