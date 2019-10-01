@@ -204,7 +204,7 @@ document.addEventListener('DOMContentLoaded',
         life -= eAttack[i];
        
         
-        if (life >= 0) {
+        if (life > 0) {
           console.log('Life : ' + life);
           document.querySelector('#life').textContent = 'Life：' + life;
           soundDamaged(); // やられた時の音呼び出し
