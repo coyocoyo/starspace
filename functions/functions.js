@@ -213,6 +213,10 @@ document.addEventListener('DOMContentLoaded',
         } else {
           //document.querySelector('.game__wrapper').style.display = 'none';
           document.querySelector('.game__over').style.display = 'block';
+
+          document.querySelector('#score').style.display = 'none';
+          document.querySelector('#level').style.display = 'none';
+
           document.querySelector('#life').style.display = 'none';
           document.querySelector('#cockpit_01').style.display = 'none';
           document.querySelector('#bgimg0').style.display = 'none';
@@ -220,6 +224,7 @@ document.addEventListener('DOMContentLoaded',
           document.querySelector('#bgm1').pause();
           bgm1.currentTime = 0;
           document.querySelector('#bgm2').play();
+          document.querySelector('#result').innerHTML = '最終スコア：' + score;
           firstE = 0;
           lastE = 0;
           setEnemies();// mouseMove.js の関数
