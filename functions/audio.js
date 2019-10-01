@@ -13,8 +13,8 @@ let soundDestroy; // 敵機の爆発音
 
 let soundDamaged; // 攻撃を受けた時の音
 
-let playBgm1;
-// let playBgm2; (エラーの元になってる気がしたので停止中)
+let playBgm1;   //play中のbgm
+// let playBgm2; (エラーの元になってる気がしたので停止中)   //game overのbgm
 // let playBgm3; (エラーの元になってる気がしたので停止中)
 
 

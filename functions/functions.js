@@ -214,7 +214,8 @@ document.addEventListener('DOMContentLoaded',
           document.querySelector('#life').style.display = 'none';
           document.querySelector('#bgm1').pause();
       bgm1.currentTime = 0;
-          
+      document.querySelector('#bgm2').play();
+
     
         }
 

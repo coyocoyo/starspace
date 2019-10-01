@@ -110,6 +110,8 @@ document.addEventListener('DOMContentLoaded',
         document.querySelector('#life').style.display = 'block';
         document.querySelector('.game__wrapper').style.display = 'block';
         document.querySelector('.game__over').style.display = 'none';
+        document.querySelector('#bgm2').pause();
+        bgm2.currentTime = 0;
 
 
         //初期化も合わせて処理しています
