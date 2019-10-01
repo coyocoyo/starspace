@@ -42,10 +42,11 @@ body{
 #result{
 margin-bottom: 10px;
 top: 460px;
-left: 200px;
+left: 165px;
 height: 10px;
-width: 100px;
+width: 200px;
 color: white;
+font-size: 20px;
 position: absolute;
 z-index: 9;
 }
