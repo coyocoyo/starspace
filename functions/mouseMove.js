@@ -8,12 +8,12 @@
 /*---------------------------
 　　　　グローバルブロックここから
 ---------------------------*/
-let popEnemyA; // functions.js から呼び出されてる
-let setEnemies; // keyBoard.jsからの呼び出しあり
-let setTarget; // functions.js から呼び出されてる
+let popEnemyA; // functions.js からの呼び出しあり。
+let setEnemies; // keyBoard.jsからの呼び出しあり。
+let setTarget; // functions.js からの呼び出しあり。
 let setBgimg; // keyBoard.jsからのテスト呼び出し → 停止中
-let shoot; // keyBoard.js から呼び出されてる
-let removeEnemy; // function.js から呼び出されてる
+let shoot; // keyBoard.js からの呼び出しあり。
+let removeEnemy; // function.js から呼び出されてる。
 // 他のjsファイルからの関数呼び出しリクエストを受け止めるために
 // ローカルにある関数の'名前だけ'グローバルで宣言しておく。
 
@@ -25,7 +25,8 @@ let removeEnemy; // function.js から呼び出されてる
 
 /*------------------------------------------------
 　　　　            ローカルブロックここから
-ここで宣言した変数、関数は他のscriptファイルからは読み込まれない。
+ ここで宣言した変数は、他のjs.ファイルからは読み込まれない。
+ 変数の命名が自由だとも言える。
 --------------------------------------------------*/
 document.addEventListener('DOMContentLoaded',
   function () {
@@ -37,17 +38,17 @@ document.addEventListener('DOMContentLoaded',
     let bgimgY; // 背景の y 座標を格納する。
     let bgimg;  // 背景用 width , height を取得するときに使ってる。
 
-    // マウス移動による背景移動のときに使ってる。
-    // 初期配置の背景、マウス移動で使ってる。
+    // マウス移動による各画像の移動に使ってる。
 
     let target0X;　// 照準の x 座標 
     let target0Y; // 照準の y 座標
     let target0;  // 照準の width , height を取得するときに使ってる。
-    // 初期配置時に照準画像の寸法に合わせて自動的に調整座標を計算する。
+    // 初期配置時に照準画像の寸法に合わせて自動的に真ん中やや上の座標に調整する。
 
     let enemyAX = []; // Aタイプの敵機の各x座標
     let enemyAY = []; // Aタイプの敵機の各y座標
-    // let enemyA = []; // Aタイプの敵機の要素取得用
+    // let enemyA = []; // Aタイプの敵機の要素取得用。
+    // functions.jsも使ってるのでグローバルに置いてみたが、別個に同名の変数を宣言しても問題ない。
 
     let eRealLife = [];
     // 動いてる敵機の実際の残り耐久力を入れておく。
@@ -58,7 +59,7 @@ document.addEventListener('DOMContentLoaded',
     let HitX = -500; // 爆発画像の x 座標　初期値-500
     let HitY = -500; // 爆発画像の y 座標 初期値-500
     let stopper2 = 0; // 命中画像の動き制御。 初期値 0
-    let timer2; // マウスクリックの当たり判定処理で使ってる。 1000ミリ秒に爆発を消す。
+    let timer2; // マウスクリックの当たり判定処理で使ってる。 200ミリ秒後に爆発を消す。
 
     let explosion; // 要素取得用
     let explosionX = -500; // 爆発画像の x 座標　初期値-500
@@ -67,18 +68,12 @@ document.addEventListener('DOMContentLoaded',
     // 爆発画像の動き制御。 初期値 0
     // 0 なら爆発は動かない。1なら動く。
     // マウス移動で常時使ってるが、当たり判定からも操作される。
-    let timer1; // マウスクリックの当たり判定処理で使ってる。 1000ミリ秒に爆発を消す。
+    let timer1; // マウスクリックの当たり判定処理で使ってる。 1000ミリ秒後に爆発を消す。
 
     let beforeX, beforeY, afterX, afterY, diffX, diffY; // マウス移動計算用変数
     let posX, posY;
 
-
-
-    /*-----------------------------------------------
-                  関数
-    
-    
-    ------------------------------------------------*/
+    let s; // 画面表示のscore要素取得用。
 
     /*-------------------------------------
                 マウス移動イベント
@@ -166,12 +161,7 @@ document.addEventListener('DOMContentLoaded',
             document.querySelector('#explosion').style.top = (explosionY += diffY * scrollrate * stopper1) + 'px';
           }
 
-
-
-
         } // for文の閉じ
-
-
 
       }, interval); // setTimeout の閉じ
       // intervalミリ秒後のマウスカーソルの座標取得、引き算、座標代入が一連の動作
@@ -183,13 +173,14 @@ document.addEventListener('DOMContentLoaded',
              当たり判定
     --------------------------*/
     // グローバルで名前だけ宣言してある関数の本定義
-    //function = shoot(){ // エラーになる。
-    //shoot = function(){ // この形は通る。
-    shoot = () => { // アロー関数も通る。この形が今の主流だとか。
+    //function = shoot(){ // ← エラーになる。
+    //shoot = function(){ // ← この形は通る。
+    shoot = () => { // アロー関数も通る。アロー関数が今の主流だとか。
 
       soundShoot(); // audio.js の関数呼び出し
 
       for (let i = firstE; i < lastE; i++) {
+        target0 = document.querySelector('#targetScope' + 0); // ページロード時のsetTarget();がなくなったので。
         enemyA[i] = document.querySelector("#enemyA" + i);
         //console.log(enemyA[i].style.width); // 機能してる
         //console.log(enemyA[i].style.height); // 機能してる
@@ -220,16 +211,21 @@ document.addEventListener('DOMContentLoaded',
             timer2 = setTimeout(remove2, 200); // 0.2秒後に remove() へ
             eRealLife[i]--; // i番の敵機の耐久力－１
 
-
             if (eRealLife[i] === 0) { // もし、i番の敵機の耐久力が0ならば
 
               // 爆発
               soundDestroy(); // audio.jsの呼び出し
               score += eScore[i];
-              let elem = document.getElementById('score');
-              elem.textContent = 'Score : ' + score;
+              // 敵毎にもらえる点数を個別に設定してる。
+              // enemySizeA[i]がスコープ的にまだ有効なので
+              // eScore[i] - enemySizeA[i] にすると
+              // 「 敵が小さいうちに倒すと高得点 」 にできる。
+              　
+              //s = document.getElementById('score');
+              //s.textContent = 'Score : ' + score + ''点;
               //console.log(score);
-              document.querySelector('#score').textContent = 'Score：' + score + '点';
+              s = document.querySelector('#score');
+              s.textContent = 'Score：' + score + '点';
               // 爆発画像を持ってくる
               explosionX = (enemyAX[i] - enemySizeA[i] / 2); // その時の敵機の座標 - ザックリ調整
               explosionY = (enemyAY[i] - enemySizeA[i] / 2); // その時の敵機の座標 - ザックリ調整
@@ -258,7 +254,7 @@ document.addEventListener('DOMContentLoaded',
      ---------------------------------------*/
 
     document.addEventListener('click', shoot, false);
-    // これだけ
+    // これだけ。　
 
     /*--------------------------------------
            マウスクリック ここまで
@@ -307,9 +303,7 @@ document.addEventListener('DOMContentLoaded',
     --------------------------------------*/
     popEnemyA = function (i) {
 
-      // console.log(i); // for文の外だが、1とか2とか正しく出る。
-      // 関数内のローカル変数になったので(カレント？)、
-      // 呼び出し元のfor文用 i の影響は受けないはずだが。
+      // console.log(i); // 呼び出し元の i はスコープが切れてるが、1とか2とか正しく出る。
 
       do {
         Xrate = Math.floor(Math.random() * 100);
@@ -329,7 +323,7 @@ document.addEventListener('DOMContentLoaded',
       enemyA[i].style.left = enemyAX[i] + 'px'; // 座標代入 この瞬間に敵機がワープする
       enemyA[i].style.top = enemyAY[i] + 'px'; // 座標代入 この瞬間に敵機がワープする
       //---------------------------------------------------------------------------------
-      enemySizeA[i] = 20; // 暫定的な設置なので要注意
+      enemySizeA[i] = 10; // 暫定的な設置なので要注意。 CSSでは10設定だった。
       //---------------------------------------------------------------------------------
       enemyA[i].style.width = enemySizeA[i] + 'px';
       enemyA[i].style.height = enemySizeA[i] / (enemyA[i].naturalWidth / enemyA[i].naturalHeight) + 'px';
@@ -339,18 +333,17 @@ document.addEventListener('DOMContentLoaded',
       eRealLife[i] = eDefaultLife[i];
       // 残り耐久力に初期値を代入。
       // 値だけが代入される。
-      // Real が引き算されても Default は引き算されない。
+      // Real が引き算されても Default は引き算されないらしい。
+      // 参照を共有してるわけではないっぽい。
 
-      // console.log('popEnemyAが呼び出されました。')
     } // PopEnemyA の閉じ
 
-    /*------------------------------------------------------
-        背景画像の真ん中をframeの真ん中に配置する。
-        背景変更はこのへんを関数でくくって呼び出すようにすれば対応できる。
-    -------------------------------------------------------*/
+    /*----------------------------------------------------------
+              背景画像の真ん中をframeの真ん中に配置する。
+    -----------------------------------------------------------*/
     setBgimg = function () {
       bgimg = new Image();
-      bgimg.src = document.getElementById('bgimg' + 0).src; // 背景画像は複数枚用意される気配
+      bgimg.src = document.getElementById('bgimg' + 0).src;
       //console.log(bgimg.height); // 背景画像の縦幅
       //console.log(bgimg.width); // 背景画像の横幅
 
@@ -366,8 +359,7 @@ document.addEventListener('DOMContentLoaded',
 
     /*--------------------------
             照準位置決定
-        真ん中のやや上に配置する
-           １リロードに１回
+        真ん中のやや上に配置する。
     ----------------------------*/
     setTarget = () => {
       target0 = new Image();
@@ -379,9 +371,11 @@ document.addEventListener('DOMContentLoaded',
       target0Y = (frameHeight / 2) - (target0.height / 2);
 
       document.querySelector('#targetScope' + 0).style.left = target0X + 'px';
-      document.querySelector('#targetScope' + 0).style.top = (target0Y - addY) + 'px'; // 照準の上下微調整。これは手動で。
+      document.querySelector('#targetScope' + 0).style.top = (target0Y - addY) + 'px';
       /*------ 照準位置決定ここまで ------*/
     }
+
+
 
     /*----敵機の初期配置、更新配置
      -----*/
@@ -399,11 +393,9 @@ document.addEventListener('DOMContentLoaded',
       } // for文の閉じ
     } // setEnemies の閉じ
     /*-------------
-   ----------------*/
-    // n = 0; // 失敗中
+    -------------*/
+
     setBgimg(); // 1回のページリロードにつき1回だけの処理 id=bgimg0 の背景画像を呼び出している。
-    //setTarget(); // 1回のページリロードにつき1回だけの処理
-    // setEnemies(); // 敵機の初期配置のために１回呼び出しておく。
 
   }, false); // DOMCon... の閉じ
 
@@ -412,13 +404,6 @@ document.addEventListener('DOMContentLoaded',
     ローカル作業スペース
 
 --------------------------*/
-
-/*
-eRealLife[4] = eDefaultLife[4];
-eRealLife[4] --; // 1 を引く
-console.log(eDefaultLife[4]);
-console.log(eRealLife[4]);
-*/
 
 /*----------------------------------------------------
 　　　　       ローカルブロックここまで
@@ -432,6 +417,7 @@ console.log(eRealLife[4]);
 
 
 /*
+
 [ マウスカーソルの座標ではなく、その移動量を取得したい。]
 
 マウスムーブイベント発生(わずかでも動いたらイベント発生)
@@ -455,10 +441,63 @@ x同士、y同士の引き算を行う。
 それぞれ加算(代入ではない)すれば、これらが同期して動き、
 自機のほうが旋回しているように見える。
 
+(追記)
+背景画像などの座標 ＝ 移動前の座標 ＋ ( マウスの移動量 x 移動速度係数 x ストッパー ) +'px';
+みたいな形で使用した。
+移動速度係数は動くもの全ての座標に使われており、これを０にすると全部を一斉に止めることができる。
+ｚキーでの固定はこれを０にしてる。
+
+ストッパー(変数)は命中エフェクトや爆発エフェクトを止めておくのに使用。背景、敵機には使っていない。
+普段は値が０で、命中や爆発を待機場所から動かないようにする。
+命中や爆発が画面内に呼ばれたときだけ値が１になって他の画像と同期して動くようになる。
+待機場所にもどると同時にまた値が０になる。
+便利だな、と思ったので。
+
 */
 
 
 
+/*
 
+[ 画面外で待機する敵 と 画面内で動く敵を切り替える ]
+
+配列の中に敵機の要素が格納されてるとする。 → [e0,e1,e2,e3,e4,e5,e6,e7,e8,e9]
+定数 enemyA_Max = 10; (用意した敵機の数。配列に入ってるので、配列の長さで表現してもいい。)
+変数 firstE = 2;
+変数 lastE = 5; が代入されてるときに
+下記の関数 setEnemies が呼ばれると
+
+    setEnemies = function () {
+
+      for (let i = 0 ; i < firstE ; i++) {
+                          ( = 2 )
+
+        removeEnemy(i);
+        // i番の敵機を待機場所に移す関数
+
+      }  // → 0番、1番 の敵機が待機場所へ
+
+
+      for (let i = firstE ; i < lastE ; i++) {
+                   ( = 2 )     ( = 5 )
+
+        popEnemyA(i);
+        // i番の敵機を画面内に移す関数
+
+      } // → 2番、3番、4番 の敵機が画面内へ
+
+
+      for (let i = lastE ; i < enemyA_Max ; i++) {
+                  ( = 5 )        ( = 10 )
+                  
+        removeEnemy(i);
+        // i番の敵機を待機場所に移す関数
+
+      } // → 5番 ～ 9番の敵機が待機場所へ。エラーなし。
+    }
+    // 用意した敵機を 待機組 と 画面内組 に振り分けできる。
+    // ゲーム中にこの処理をやると、目の前の敵機がいきなり消えるという欠点もある。
+
+*/
 
 

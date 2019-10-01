@@ -17,12 +17,12 @@
 キー 「 2 」 : 1 普通
 キー 「 3 」 : 5 速い (これぐらいがちょうどいい？)
 
-キー 「 8 」 : BGM1 再生
-キー 「 9 」 : BGM2 再生 (エラーの元になってる気がしたので停止中) → 敵機の組み合わせ変更キー
-キー 「 0 」 : BGM3 再生 (エラーの元になってる気がしたので停止中) → 敵機の組み合わせ変更キー
+キー 「 8 」 : 使わなくなった。
+キー 「 9 」 : 使わなくなった。
+キー 「 0 」 : 使わなくなった。
 
 キー 「 x 」
-画面上のマウスカーソルの可視・不可視切り替え
+画面上のマウスカーソルの可視・不可視切り替え。役に立ってない。
 
 キー 「 z 」
 背景画像・敵機・爆発のマウス追従をストップする
@@ -59,22 +59,26 @@ document.addEventListener('DOMContentLoaded',
 
     let mouseCursor = 'auto';
     // マウスカーソルの可視・不可視切り替え用。'none' か 'auto'かの文字列を格納。初期値:auto
-    // ここでしか使わない変数なのでは。
-    // 値を持ったままジッと待機していてもらう。
+
+    let l; // 画面上の life 表示要素取得用
+
+    let s; // 画面上の score 表示要素取得用
+
+    let lvl; // 画面上の level 要素取得用
 
     document.addEventListener('keydown', function (e) {
-      // if (!e) e = window.event;
 
       if (e.key === 'a') { // 開発用チートキー
 
         life = -10; // いきなりライフ-10
-        let elem = document.getElementById('HP');
-        elem.textContent = 'HP : ' + life;
+        l = document.getElementById('HP');
+        l.textContent = 'HP : ' + life;
+
       } else if (e.key === 's') { // 開発用チートキー
 
         score += 1000; // スコアに1000加算
-        elem = document.getElementById('score');
-        elem.textContent = 'Score : ' + score;
+        s = document.getElementById('score');
+        s.textContent = 'Score : ' + score;
 
       } else if (e.key === ' ') {
         shoot(); // mouseMove.js の関数呼び出し
@@ -88,22 +92,28 @@ document.addEventListener('DOMContentLoaded',
       } else if (e.key === 'z' && scrollrate !== 0) { // 「z」でスクロールロック
         num = scrollrate; // 一旦別の変数に記憶させる。 0.2 , 1 , 5 のうちのどの速さでやってるか分からないので。
         scrollrate = 0; // 動かなくする。背景・敵機・爆発画像全部が止まる。
-        z_key = 'locked'; // 0 にする。 「動かない」の意keyupイベントが起きたら戻す。
+        z_key = 'locked'; // 「動かない」の意keyupイベントが起きたら戻す。
 
       } else if (e.key === 'Enter') { // 「Enter」 で敵機の拡大・攻撃スタート
+
         enemySpeed = 2;
+
         score = 0;
-        let elem = document.getElementById('score');
-        elem.textContent = 'Score : ' + score;
+        s = document.getElementById('score');
+        s.textContent = 'Score : ' + score;
+
         level = 1;
-        elem = document.getElementById('level');
-        elem.textContent = 'level : ' + level;
+        lvl = document.getElementById('level');
+        lvl.textContent = 'level : ' + level;
+
         firstE = 0;
         lastE = 3;
         setEnemies();// mouseMove.js の関数
         // 配列０番～２番の敵を500x500フレーム内に呼び出して拡大モードにし、他は待機させておく関数
-        setTarget();// mouseMove.js の関数
-        enemySizeup(); // function.js の関数
+        enemySizeup(); // function.js の関数。敵機拡大開始
+
+        setTarget();// mouseMove.js の関数。照準設置
+        
         document.querySelector('#result').innerHTML = '';
         document.querySelector('.game__start').style.display = 'none';
         document.querySelector('#cockpit_01').style.display = 'block';
@@ -115,10 +125,6 @@ document.addEventListener('DOMContentLoaded',
         document.querySelector('.game__wrapper').style.display = 'block';
         document.querySelector('.game__over').style.display = 'none';
         playBgm1(); // audio.js の関数呼び出し
-        /*
-        document.querySelector('#bgm2').pause();
-        bgm2.currentTime = 0;
-        */
 
         //初期化も合わせて処理しています
 
@@ -155,7 +161,7 @@ document.addEventListener('DOMContentLoaded',
     document.addEventListener('keyup', function (e) {
 
       if (e.key === 'z' && z_key === 'locked') {
-        scrollrate = num; // 一旦記憶させた値をもどす
+        scrollrate = num; // 止めるときに一旦記憶させた値をもどす
         z_key = 'movable'; // 「動く」の意味
       } // if文の閉じ
 
