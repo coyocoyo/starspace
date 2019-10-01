@@ -176,7 +176,7 @@ document.addEventListener('DOMContentLoaded',
 
   //function enemySize(){ // ← これはエラーになる
   //enemySizeup = function(){ // ← これは通る。
-  enemySizeup = () => {
+  enemySizeup = () => { // アロー関数も通る。アロー関数が最近
 
     clearTimeout(timer2);
     // これがないと、敵の種類を変えるごとに拡大が加速する。
@@ -212,14 +212,23 @@ document.addEventListener('DOMContentLoaded',
           // for文用の i を引数にして敵のリポップ関数を呼び出し。機能してるっぽい。
         } else {
           //document.querySelector('.game__wrapper').style.display = 'none';
-          document.querySelector('.game__over').style.display = 'block';
+          //document.querySelector('.game__over').style.display = 'block';
           document.querySelector('#life').style.display = 'none';
           document.querySelector('#bgm1').pause();
           bgm1.currentTime = 0;
           document.querySelector('#bgm2').play();
-          for (let i = 0; i < enemyA_Max; i++) {
-            removeEnemy(i);
-          }
+          firstE = 0;
+          lastE = 0;
+          setEnemy();// mouseMove.js の関数
+
+          enemyA[0] = document.querySelector('#enemyA' + 0);
+          enemyA[0].style.left = -500 + 'px';
+          enemyA[0].style.top = -500 + 'px';
+          
+          
+          //for (let i = 0; i < enemyA_Max; i++) {
+
+          //}
 
     
         }
