@@ -10,6 +10,7 @@
 ---------------------------*/
 let popEnemyA; // function.js から呼び出されてる
 let setEnemies; // keyBoard.jsからの呼び出しあり
+let setTarget;
 let setBgimg; // keyBoard.jsからのテスト呼び出し → 停止中
 let shoot;
 // 他のjsファイルからの関数呼び出しリクエストを受け止めるために
@@ -365,7 +366,7 @@ document.addEventListener('DOMContentLoaded',
         真ん中のやや上に配置する
            １リロードに１回
     ----------------------------*/
-    function setTarget() {
+    setTarget = () => {
       target0 = new Image();
       target0.src = document.getElementById('targetScope' + 0).src;
       //console.log(target0.height); // 照準画像の縦幅

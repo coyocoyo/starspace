@@ -20,9 +20,9 @@ ul{
 .game__start {
   margin-bottom:10px;
   top: -500px;
-height:500px;
-width:500px;
-overflow:hidden;
+  height:500px;
+  width:500px;
+  overflow:hidden;
 	margin: auto;
 	position: relative;
 }
