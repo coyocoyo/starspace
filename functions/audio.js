@@ -90,32 +90,29 @@ document.addEventListener('DOMContentLoaded',
       document.querySelector('#bgm1').currentTime = 0;
       document.querySelector('#bgm1').play();
       console.log('関数 playBgm1 が呼ばれました'); // ここまでは実行される
-
-
-
     }
 
-    /* エラーの元になってる気がする・・・。
-      playBgm2 = function() {
-        console.log('関数 playBgm2 が呼ばれました'); // ここまでは実行される
-        //document.querySelector('#bgm1').pause(); // 他を止める (機能しない エラーになる)
-        //document.querySelector('#bgm3').pause(); // 他を止める (機能しない エラーになる)
-        document.querySelector('#bgm2').volume = 0.8; // 0 ~ 1 で設定する。
-        document.querySelector('#bgm2').currentTime = 0;
-        document.querySelector('#bgm2').play();
-      }
+    /*
+        playBgm2 = function () {
+          console.log('関数 playBgm2 が呼ばれました'); // ここまでは実行される
+          //document.querySelector('#bgm1').pause(); // 他を止める (機能しない エラーになる)
+          //document.querySelector('#bgm3').pause(); // 他を止める (機能しない エラーになる)
+          document.querySelector('#bgm2').volume = 0.8; // 0 ~ 1 で設定する。
+          document.querySelector('#bgm2').currentTime = 0;
+          document.querySelector('#bgm2').play();
+        }
     
-    
-    
-      playBgm3 = function() {
-        console.log('関数 playBgm3 が呼ばれました'); // ここまでは実行される
-        //document.querySelector('#bgm1').pause(); // 他を止める (機能しない エラーになる)
-        //document.querySelector('#bgm2').pause(); // 他を止める (機能しない エラーになる)
-        document.querySelector('#bgm3').volume = 0.8; // 0 ~ 1 で設定する。
-        document.querySelector('#bgm3').currentTime = 0;
-        document.querySelector('#bgm3').play();
-      }
-    */
+        
+        
+          playBgm3 = function() {
+            console.log('関数 playBgm3 が呼ばれました'); // ここまでは実行される
+            //document.querySelector('#bgm1').pause(); // 他を止める (機能しない エラーになる)
+            //document.querySelector('#bgm2').pause(); // 他を止める (機能しない エラーになる)
+            document.querySelector('#bgm3').volume = 0.8; // 0 ~ 1 で設定する。
+            document.querySelector('#bgm3').currentTime = 0;
+            document.querySelector('#bgm3').play();
+          }
+        */
 
 
 

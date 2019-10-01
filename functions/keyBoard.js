@@ -90,7 +90,7 @@ document.addEventListener('DOMContentLoaded',
         z_key = 'locked'; // 0 にする。 「動かない」の意keyupイベントが起きたら戻す。
 
       } else if (e.key === 'Enter') { // 「Enter」 で敵機の拡大・攻撃スタート
-
+        enemySpeed = 2;
         score = 0;
         let elem = document.getElementById('score');
         elem.textContent = 'Score : ' + score;
@@ -108,11 +108,11 @@ document.addEventListener('DOMContentLoaded',
         document.querySelector('#score').style.display = 'block';
         document.querySelector('#level').style.display = 'block';
         document.querySelector('#life').style.display = 'block';
+        document.querySelector('.game__wrapper').style.display = 'block';
+        document.querySelector('.game__over').style.display = 'none';
 
 
-
-
-        // playBgm1();
+        //初期化も合わせて処理しています
 
         playBgm1();
 
