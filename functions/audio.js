@@ -13,9 +13,12 @@ let soundDestroy; // 敵機の爆発音
 
 let soundDamaged; // 攻撃を受けた時の音
 
-let playBgm1;   //play中のbgm
+let playBgm1; // BGM1再生
+
+let playBgm2; // BGM2再生 GAMEOVER音
 // let playBgm2; (エラーの元になってる気がしたので停止中)   //game overのbgm
 // let playBgm3; (エラーの元になってる気がしたので停止中)
+
 
 
 // 外部からの関数を呼び出しを受け止めるために
@@ -33,7 +36,7 @@ document.addEventListener('DOMContentLoaded',
     'use strict';
 
     let soundShoot01, soundShoot02;
-    let timer;
+    let timer; // 使ってない？
 
     let R1 = 1; // ローテーション用変数 初期値 1
     soundShoot = function () {
@@ -58,13 +61,11 @@ document.addEventListener('DOMContentLoaded',
     }
     // id を２つぐらい用意すれば軽い連打なら対応できてると思う。
 
-
     soundHit = function () {
       document.querySelector('#soundHit').currentTime = 0;
       document.querySelector('#soundHit').volume = 0.4; // 0 ~ 1 で設定する。
       document.querySelector('#soundHit').play();
     }
-
 
     // 敵機を撃墜したときの音
     soundDestroy = function () {
@@ -73,26 +74,31 @@ document.addEventListener('DOMContentLoaded',
       document.querySelector('#soundDestroy').play();
     }
 
-
-
-
     soundDamaged = function () {
       document.querySelector('#soundDamaged').currentTime = 0;
       document.querySelector('#soundDamaged').volume = 0.8; // 0 ~ 1 で設定する。
       document.querySelector('#soundDamaged').play();
     }
 
-
     playBgm1 = function () {
 
       //document.querySelector('#bgm2').pause(); // 他を止める (機能しない エラーになる)
       //document.querySelector('#bgm3').pause(); // 他を止める (機能しない エラーになる)
+      document.querySelector('#bgm2').pause();
+      bgm2.currentTime = 0;
       document.querySelector('#bgm1').volume = 1; // 0 ~ 1 で設定する。
-      document.querySelector('#bgm1').currentTime = 0;
       document.querySelector('#bgm1').play();
-      console.log('関数 playBgm1 が呼ばれました'); // ここまでは実行される
+      //console.log('関数 playBgm1 が呼ばれました'); // ここまでは実行される
 
     }
+
+    playBgm2 = () => {
+      document.querySelector('#bgm1').pause();
+      bgm1.currentTime = 0;
+      document.querySelector('#bgm2').play();
+    }
+
+
 
     // timer = setTimeout(playBgm1, 1000);
 

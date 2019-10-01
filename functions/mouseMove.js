@@ -182,11 +182,12 @@ document.addEventListener('DOMContentLoaded',
     /*--------------------------
              当たり判定
     --------------------------*/
-    //
-    //shoot = function(){ // この形は通る
-    shoot = () => { // アロー関数
+    // グローバルで名前だけ宣言してある関数の本定義
+    //function = shoot(){ // エラーになる。
+    //shoot = function(){ // この形は通る。
+    shoot = () => { // アロー関数も通る。この形が今の主流だとか。
 
-      soundShoot(); // 弾発射音呼び出し　サンプルはちょっと耳障り
+      soundShoot(); // audio.js の関数呼び出し
 
       for (let i = firstE; i < lastE; i++) {
         enemyA[i] = document.querySelector("#enemyA" + i);
@@ -208,7 +209,7 @@ document.addEventListener('DOMContentLoaded',
           ) {
             // console.log('座標 ' + enemyAX[i] +',' + enemyAY[i] +' にて enemyA' +i +' に当たり判定');
 
-            soundHit(); // 自機の攻撃が当たった時の音呼び出し
+            soundHit(); // audio.jsの関数呼び出し
             // 命中エフェクト画像を持ってくる
             HitX = (enemyAX[i] + enemySizeA[i] / 4); // その時の敵機の座標 - ザックリ調整
             HitY = (enemyAY[i] + enemySizeA[i] / 4); // その時の敵機の座標 - ザックリ調整
@@ -223,7 +224,7 @@ document.addEventListener('DOMContentLoaded',
             if (eRealLife[i] === 0) { // もし、i番の敵機の耐久力が0ならば
 
               // 爆発
-              soundDestroy(); // 爆発音呼び出し
+              soundDestroy(); // audio.jsの呼び出し
               score += eScore[i];
               let elem = document.getElementById('score');
               elem.textContent = 'Score : ' + score;
@@ -265,7 +266,7 @@ document.addEventListener('DOMContentLoaded',
 
     /*---使わない敵機を待機位置に移す
      ----*/
-    removeEnemy = (i) => {
+    removeEnemy = (i) => { // アロー関数
       enemyA[i] = document.querySelector('#enemyA' + i);
       enemyA[i].style.left = -500 + 'px';
       enemyA[i].style.top = -500 + 'px';

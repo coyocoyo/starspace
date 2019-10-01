@@ -153,17 +153,17 @@ let enemySizeup; // keyBoard.js から呼び出されてる
   // keyboard.js から呼び出されるため、
   // グローバルで名前だけ宣言しておく。
   // 本体は下のほう ↓↓
-/*---------------------------
+/*------------------------------------
 　　　　グローバルブロックここまで
----------------------------*/
+------------------------------------*/
 
 
 
-/*-----------------------------
+/*--------------------------------------
      ローカルブロックここから
     ここで宣言した変数、関数は
 他のscriptファイルからは読み込まれない。
---------------------------------*/
+---------------------------------------*/
 
 document.addEventListener('DOMContentLoaded',
   function () {
@@ -207,37 +207,37 @@ document.addEventListener('DOMContentLoaded',
         if (life > 0) {
           console.log('Life : ' + life);
           document.querySelector('#life').textContent = 'Life：' + life;
-          soundDamaged(); // やられた時の音呼び出し
-          popEnemyA(i);
+          soundDamaged(); // audio.js の関数
+          popEnemyA(i); // mouseMove.js の関数
           // for文用の i を引数にして敵のリポップ関数を呼び出し。機能してるっぽい。
         } else {
           //document.querySelector('.game__wrapper').style.display = 'none';
           document.querySelector('.game__over').style.display = 'block';
-
           document.querySelector('#score').style.display = 'none';
           document.querySelector('#level').style.display = 'none';
-
           document.querySelector('#life').style.display = 'none';
           document.querySelector('#cockpit_01').style.display = 'none';
           document.querySelector('#bgimg0').style.display = 'none';
           document.querySelector('#targetScope0').style.display = 'none';
+          playBgm2(); // audio.js の関数
+          /*
           document.querySelector('#bgm1').pause();
           bgm1.currentTime = 0;
           document.querySelector('#bgm2').play();
-          document.querySelector('#result').innerHTML = '最終スコア：' +score;
+          */
+          document.querySelector('#result').innerHTML = '最終スコア：' + score;
+
+          // 全ての敵機を待機位置に。
           firstE = 0;
           lastE = 0;
           setEnemies();// mouseMove.js の関数
 
+          // 意味のない処理かも
+          /*
           enemyA[0] = document.querySelector('#enemyA' + 0);
           enemyA[0].style.left = -500 + 'px';
           enemyA[0].style.top = -500 + 'px';
-          
-          
-          //for (let i = 0; i < enemyA_Max; i++) {
-
-          //}
-
+          */
     
         }
 
@@ -257,7 +257,7 @@ document.addEventListener('DOMContentLoaded',
       enemySpeed = 4;
       firstE = 0;
       lastE = 4;
-      setEnemies(); // 配置
+      setEnemies(); // mouseMove.js の関数(first と last で指定された範囲の敵機をフレーム内に配置する。)
       enemySizeup(); // 拡大開始
     } else if (score >= 2000 && level === 2) {
       level = 3;
@@ -265,7 +265,7 @@ document.addEventListener('DOMContentLoaded',
       enemySpeed = 6;
       firstE = 1;
       lastE = 5;
-      setEnemies(); // 配置
+      setEnemies(); //  mouseMove.js の関数
       enemySizeup(); // 拡大開始
     } else if (score >= 3000 && level === 3) {
       level = 4;
@@ -273,7 +273,7 @@ document.addEventListener('DOMContentLoaded',
       enemySpeed = 8;
       firstE = 2;
       lastE = 6;
-      setEnemies(); // 配置
+      setEnemies(); //  mouseMove.js の関数
       enemySizeup(); // 拡大開始
     } else if (score >= 4000 && level === 4) {
       level = 5;
@@ -281,7 +281,7 @@ document.addEventListener('DOMContentLoaded',
       enemySpeed = 10;
       firstE = 4;
       lastE = 10;
-      setEnemies(); // 配置
+      setEnemies(); // mouseMove.js の関数
       enemySizeup(); // 拡大開始
     }
  /*--------------------------------------------------------------------------------------
@@ -306,39 +306,23 @@ document.addEventListener('DOMContentLoaded',
 
   --------------------*/
     
-
-
-
-    
-
-
 }, false); // DOMCon... の閉じ
 /*------------------------------------------------
 　　　　            ローカルブロックここまで
 --------------------------------------------------*/
 
-  /*------------------
+  /*-----------------------
   
     グローバル作業スペース
 
-  ---------------------*/
+  ------------------------*/
 
     //enemyA = document.querySelector("#enemyA0");
     //console.log(enemyA.naturalWidth);
     //console.log(enemyA.naturalHeight);
     // 縮小表示前の本来の縦幅・横幅の取得成功
 
-
     //enemyA.naturalWidth/enemyA.naturalHeight // わり算
-
-    // 例えば、横幅１２、縦幅４の画像があるとする。
-    // タテヨコのわり算で３という数字が得られる。
-
-    // 拡大して横幅が３０になった場合、縦幅は１０になればいいので、
-    // 横幅を３で割ればいい。
-
-    // enemySizeA[i] に横幅だけを格納し、
-    // 縦幅は横幅÷３で求めさせれば、縦・横の寸法の違う画像でも自動で対応できる。
 
     /*
     for(let i = 0 ; i < enemyA_Max ; i++){
@@ -391,6 +375,30 @@ document.addEventListener('DOMContentLoaded',
 
   // この段階では敵機の拡大を無視した式。
 
+/*
+
+[ 画像の大きさ、縦横比に関係なく
+　全ての画像を横幅 20px から 200px に拡大したい。
+  形がゆがんだらダメ。]
+let enemySize = 20; // という変数を宣言しているとして
+     
+let enemyA = document.querySelector("#enemyA0"); // enemyA という、要素を格納するための変数
+console.log(enemyA.naturalWidth); // 画像の実際の横幅
+console.log(enemyA.naturalHeight); // 画像の実際の縦幅
+console.log(enemyA.style.width); // 画像の表示上の横幅 ~~px 単位つき
+console.log(enemyA.style.height); // 画像の表示上の縦幅 ~~px 単位つき
+
+画像の '実際の' 横幅と縦幅でわり算をする。( 3になっても1/3になってもどちらでもよい。)
+enemyA.naturalWidth/enemyA.naturalHeight
+enemyA.style.width = enemySize + 'px'; // 変数 enemySize をそのまま使える。
+enemyA.style.height = enemySize * ( enemyA.naturalWidth / enemyA.naturalHeight ) + 'px';
+
+enemySize += 2; と
+setTimeout( 処理や関数 , 20 ); や setInterval( 処理や関数 , 20 ); で
+少しずつ大きくなる画像を表示できる。
+大きさ、縦横比は画像毎に違っていても問題ない。
+
+*/
 
 
 

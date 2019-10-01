@@ -67,16 +67,17 @@ document.addEventListener('DOMContentLoaded',
 
       if (e.key === 'a') { // 開発用チートキー
 
-        life = 0; // いきなりライフ０
-
+        life = -10; // いきなりライフ-10
+        let elem = document.getElementById('HP');
+        elem.textContent = 'HP : ' + life;
       } else if (e.key === 's') { // 開発用チートキー
 
         score += 1000; // スコアに1000加算
-        let elem = document.getElementById('score');
+        elem = document.getElementById('score');
         elem.textContent = 'Score : ' + score;
 
       } else if (e.key === ' ') {
-        shoot();
+        shoot(); // mouseMove.js の関数呼び出し
       } else if (e.key === 'x' && mouseCursor === 'auto') { // 「x」でマウスカーソルの可視・不可視切り替え
         document.body.style.cursor = 'none';
         mouseCursor = 'none'
@@ -99,8 +100,9 @@ document.addEventListener('DOMContentLoaded',
         elem.textContent = 'level : ' + level;
         firstE = 0;
         lastE = 3;
-        setTarget();// mouseMove.js の関数
         setEnemies();// mouseMove.js の関数
+        // 配列０番～２番の敵を500x500フレーム内に呼び出して拡大モードにし、他は待機させておく関数
+        setTarget();// mouseMove.js の関数
         enemySizeup(); // function.js の関数
         document.querySelector('#result').innerHTML = '';
         document.querySelector('.game__start').style.display = 'none';
@@ -112,16 +114,13 @@ document.addEventListener('DOMContentLoaded',
         document.querySelector('#targetScope0').style.display = 'block';
         document.querySelector('.game__wrapper').style.display = 'block';
         document.querySelector('.game__over').style.display = 'none';
+        playBgm1(); // audio.js の関数呼び出し
+        /*
         document.querySelector('#bgm2').pause();
         bgm2.currentTime = 0;
-
+        */
 
         //初期化も合わせて処理しています
-
-        playBgm1();
-
-        // 配列０番～２番の敵を500x500フレーム内に呼び出して拡大モードにし、他は待機させておく関数
-
 
       } else if (e.key === '1') { // scrollrate の操作
         scrollrate = 0.2;
@@ -131,29 +130,16 @@ document.addEventListener('DOMContentLoaded',
         scrollrate = 5; // scrollrate の処理ここまで
 
       } else if (e.key === '8') {
-        //n = 1;
-        //setBgimg(n); // 失敗中
-        // playBgm1();
+
+        // 使っていない
+
       } else if (e.key === '9') {
 
-        //firstE = 2;
-        //lastE = 5;
-        //setEnemies(); // 配置
-        //enemySizeup(); // 拡大開始
-
-        // 配列2番～4番の敵を500x500フレーム内に呼び出して拡大モードにし、他は待機させておく関数
-
-        // bgm2 再生 (エラーの元になってる気がしたので停止中)
+        // 使っていない
 
       } else if (e.key === '0') {
 
-        //firstE = 3;
-        //lastE = 6;
-        //setEnemies(); // 配置
-        //enemySizeup(); // 拡大開始
-        // 配列３番～５番の敵を500x500フレーム内に呼び出して拡大モードにし、他は待機させておく関数
-
-        // playBgm3(); // bgm3 再生 (エラーの元になってる気がしたので停止中)
+        // 使っていない
 
       }// if文の閉じ
 
