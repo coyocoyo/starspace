@@ -213,11 +213,6 @@ document.addEventListener('DOMContentLoaded',
         } else {
           //document.querySelector('.game__wrapper').style.display = 'none';
           document.querySelector('.game__over').style.display = 'block';
-<<<<<<< HEAD
-=======
-          document.querySelector('#score').style.display = 'none';
-          document.querySelector('#level').style.display = 'none';
->>>>>>> cbbaa9a0b097a076679d53c5eade04f74315245e
           document.querySelector('#life').style.display = 'none';
           document.querySelector('#cockpit_01').style.display = 'none';
           document.querySelector('#bgimg0').style.display = 'none';
