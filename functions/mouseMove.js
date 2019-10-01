@@ -399,7 +399,7 @@ document.addEventListener('DOMContentLoaded',
     // n = 0; // 失敗中
     setBgimg(); // 1回のページリロードにつき1回だけの処理 id=bgimg0 の背景画像を呼び出している。
     setTarget(); // 1回のページリロードにつき1回だけの処理
-    setEnemies(); // 敵機の初期配置のために１回呼び出しておく。
+    // setEnemies(); // 敵機の初期配置のために１回呼び出しておく。
 
   }, false); // DOMCon... の閉じ
 
@@ -427,6 +427,22 @@ console.log(eRealLife[4]);
 ------------------------*/
 
 
+/*
+[ マウスカーソルの座標ではなく、その移動量を取得したい。]
+
+マウスムーブイベント発生(わずかでも動いたらイベントが発生する)
+↓
+発生した瞬間のマウスカーソルの座標取得
+document.onmousemove = function (e) {
+e.screenX; (x座標の数値)
+e.screenY; (y座標の数値)
+}
+↓
+
+
+
+
+*/
 
 
 

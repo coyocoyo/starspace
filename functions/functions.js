@@ -213,8 +213,11 @@ document.addEventListener('DOMContentLoaded',
           document.querySelector('.game__over').style.display = 'block';
           document.querySelector('#life').style.display = 'none';
           document.querySelector('#bgm1').pause();
-      bgm1.currentTime = 0;
-      document.querySelector('#bgm2').play();
+          bgm1.currentTime = 0;
+          document.querySelector('#bgm2').play();
+          for (let i = 0; i < enemyA_Max; i++) {
+            removeEnemy(i);
+          }
 
     
         }
