@@ -99,9 +99,9 @@ document.addEventListener('DOMContentLoaded',
         elem.textContent = 'level : ' + level;
         firstE = 0;
         lastE = 3;
-        setTarget();
-        setEnemies();
-        enemySizeup();
+        setTarget();// mouseMove.js の関数
+        setEnemies();// mouseMove.js の関数
+        enemySizeup(); // function.js の関数
 
         document.querySelector('.game__start').style.display = 'none';
         document.querySelector('#cockpit_01').style.display = 'block';

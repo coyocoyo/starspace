@@ -8,11 +8,12 @@
 /*---------------------------
 　　　　グローバルブロックここから
 ---------------------------*/
-let popEnemyA; // function.js から呼び出されてる
+let popEnemyA; // functions.js から呼び出されてる
 let setEnemies; // keyBoard.jsからの呼び出しあり
-let setTarget;
+let setTarget; // functions.js から呼び出されてる
 let setBgimg; // keyBoard.jsからのテスト呼び出し → 停止中
-let shoot;
+let shoot; // keyBoard.js から呼び出されてる
+let removeEnemy; // function.js から呼び出されてる
 // 他のjsファイルからの関数呼び出しリクエストを受け止めるために
 // ローカルにある関数の'名前だけ'グローバルで宣言しておく。
 
@@ -263,7 +264,7 @@ document.addEventListener('DOMContentLoaded',
 
     /*---使わない敵機を待機位置に移す
      ----*/
-    function removeEnemy(i) {
+    removeEnemy = (i) => {
       enemyA[i] = document.querySelector('#enemyA' + i);
       enemyA[i].style.left = -500 + 'px';
       enemyA[i].style.top = -500 + 'px';
@@ -404,11 +405,11 @@ document.addEventListener('DOMContentLoaded',
 
   }, false); // DOMCon... の閉じ
 
-/*-----------------------
+/*-------------------------
 
     ローカル作業スペース
 
-------------------------*/
+--------------------------*/
 
 /*
 eRealLife[4] = eDefaultLife[4];
@@ -417,31 +418,40 @@ console.log(eDefaultLife[4]);
 console.log(eRealLife[4]);
 */
 
-/*------------------------------------------------
-　　　　            ローカルブロックここまで
---------------------------------------------------*/
+/*----------------------------------------------------
+　　　　       ローカルブロックここまで
+----------------------------------------------------*/
 
-/*-----------------------
+/*--------------------------
 
      グローバル作業スペース
 
-------------------------*/
+---------------------------*/
 
 
 /*
 [ マウスカーソルの座標ではなく、その移動量を取得したい。]
 
-マウスムーブイベント発生(わずかでも動いたらイベントが発生する)
+マウスムーブイベント発生(わずかでも動いたらイベント発生)
 ↓
-発生した瞬間のマウスカーソルの座標取得
+発生した瞬間のマウスカーソルの座標取得し、変数に格納
 document.onmousemove = function (e) {
-e.screenX; (x座標の数値)
-e.screenY; (y座標の数値)
+x格納用変数 = e.screenX; (x座標の数値)
+y格納用変数 = e.screenY; (y座標の数値)
 }
 ↓
-
-
-
+20ミリ秒後にもう１度座標を取得
+setTimeout(function(){
+x格納用変数２ = e.screenX;
+y格納用変数２ = e.screenY;
+},20)
+↓
+x同士、y同士の引き算を行う。
+( x の引き算の答えが正なら、マウスは右に動いたことになる。)
+↓
+背景image,敵機image,命中エフェクトimage,爆発エフェクトimageの座標に
+それぞれ加算(代入ではない)すれば、これらが同期して動き、
+自機のほうが旋回しているように見える。
 
 */
 

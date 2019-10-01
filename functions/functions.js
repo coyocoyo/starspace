@@ -1,7 +1,7 @@
 
-/*---------------------------
+/*-----------------------------------
 　　　　グローバルブロックここから
----------------------------*/
+------------------------------------*/
 
 /* グローバル変数・定数コーナー */
 /*---------------------------------------
@@ -149,7 +149,7 @@
   let enemySizeA = []; // 各敵の大きさを入れておく。 function.js と mouseMove.js で使ってる。
 
   //-------  関数の窓口 -----------
-let enemySizeup;
+let enemySizeup; // keyBoard.js から呼び出されてる
   // keyboard.js から呼び出されるため、
   // グローバルで名前だけ宣言しておく。
   // 本体は下のほう ↓↓
@@ -174,7 +174,9 @@ document.addEventListener('DOMContentLoaded',
 --------------------------------------------------*/
   let timer2; // 敵機の拡大処理、自機の被ダメージ判定で使用
 
-  enemySizeup = function() {
+  //function enemySize(){ // ← これはエラーになる
+  //enemySizeup = function(){ // ← これは通る。
+  enemySizeup = () => {
 
     clearTimeout(timer2);
     // これがないと、敵の種類を変えるごとに拡大が加速する。
@@ -209,7 +211,7 @@ document.addEventListener('DOMContentLoaded',
           popEnemyA(i);
           // for文用の i を引数にして敵のリポップ関数を呼び出し。機能してるっぽい。
         } else {
-          document.querySelector('.game__wrapper').style.display = 'none';
+          //document.querySelector('.game__wrapper').style.display = 'none';
           document.querySelector('.game__over').style.display = 'block';
           document.querySelector('#life').style.display = 'none';
           document.querySelector('#bgm1').pause();
