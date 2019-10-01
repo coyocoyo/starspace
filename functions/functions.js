@@ -241,7 +241,6 @@ document.addEventListener('DOMContentLoaded',
     } else if (score >= 4000 && level === 4) {
       level = 5;
       document.getElementById('level').textContent = 'level : ' + level;
-      HTMLCanvasElement;
       enemySpeed = 10;
       firstE = 4;
       lastE = 10;

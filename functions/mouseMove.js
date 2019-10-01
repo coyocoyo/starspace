@@ -8,9 +8,9 @@
 /*---------------------------
 　　　　グローバルブロックここから
 ---------------------------*/
-let popEnemyA;
-let setEnemies; // keyBoard.jsからのテスト呼び出し
-let setBgimg; // keyBoard.jsからのテスト呼び出し
+let popEnemyA; // function.js から呼び出されてる
+let setEnemies; // keyBoard.jsからの呼び出しあり
+let setBgimg; // keyBoard.jsからのテスト呼び出し → 停止中
 let shoot;
 // 他のjsファイルからの関数呼び出しリクエストを受け止めるために
 // ローカルにある関数の'名前だけ'グローバルで宣言しておく。
@@ -223,7 +223,7 @@ document.addEventListener('DOMContentLoaded',
               soundDestroy(); // 爆発音呼び出し
               score += eScore[i];
               let elem = document.getElementById('score');
-              elem.textContent = 'Score : ' +score;
+              elem.textContent = 'Score : ' + score;
               //console.log(score);
               document.querySelector('#score').textContent = 'Score：' + score + '点';
               // 爆発画像を持ってくる

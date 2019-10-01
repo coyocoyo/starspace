@@ -132,10 +132,10 @@ document.addEventListener('DOMContentLoaded',
         // playBgm1();
       } else if (e.key === '9') {
 
-        firstE = 2;
-        lastE = 5;
-        setEnemies(); // 配置
-        enemySizeup(); // 拡大開始
+        //firstE = 2;
+        //lastE = 5;
+        //setEnemies(); // 配置
+        //enemySizeup(); // 拡大開始
 
         // 配列2番～4番の敵を500x500フレーム内に呼び出して拡大モードにし、他は待機させておく関数
 
@@ -143,10 +143,10 @@ document.addEventListener('DOMContentLoaded',
 
       } else if (e.key === '0') {
 
-        firstE = 3;
-        lastE = 6;
-        setEnemies(); // 配置
-        enemySizeup(); // 拡大開始
+        //firstE = 3;
+        //lastE = 6;
+        //setEnemies(); // 配置
+        //enemySizeup(); // 拡大開始
         // 配列３番～５番の敵を500x500フレーム内に呼び出して拡大モードにし、他は待機させておく関数
 
         // playBgm3(); // bgm3 再生 (エラーの元になってる気がしたので停止中)

@@ -33,6 +33,7 @@ document.addEventListener('DOMContentLoaded',
     'use strict';
 
     let soundShoot01, soundShoot02;
+    let timer;
 
     let R1 = 1; // ローテーション用変数 初期値 1
     soundShoot = function () {
@@ -91,9 +92,9 @@ document.addEventListener('DOMContentLoaded',
       document.querySelector('#bgm1').play();
       console.log('関数 playBgm1 が呼ばれました'); // ここまでは実行される
 
-
-
     }
+
+    // timer = setTimeout(playBgm1, 1000);
 
     /* エラーの元になってる気がする・・・。
       playBgm2 = function() {
