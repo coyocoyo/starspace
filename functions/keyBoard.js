@@ -97,7 +97,8 @@ document.addEventListener('DOMContentLoaded',
       } else if (e.key === 'Enter') { // 「Enter」 で敵機の拡大・攻撃スタート
 
         enemySpeed = 2;
-
+        life = 100;
+        document.querySelector('#life').innerHTML = 'Life : ' + life;
         score = 0;
         s = document.getElementById('score');
         s.textContent = 'Score : ' + score;
