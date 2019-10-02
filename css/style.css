@@ -125,15 +125,6 @@ position:relative;
   z-index:-20;
 }
 
-/* 失敗中
-#bgimg1 {
-  left:0;
-  top:0;
-  position:absolute;
-  z-index:-20;
-}
-*/
-
 /* 照準 */
 #targetScope0 {
   left:-500px;

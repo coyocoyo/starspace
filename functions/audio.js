@@ -15,14 +15,11 @@ let soundDamaged; // 攻撃を受けた時の音
 
 let playBgm1; // BGM1再生
 
-let playBgm2; // BGM2再生 GAMEOVER音
-// let playBgm2; (エラーの元になってる気がしたので停止中)   //game overのbgm
-// let playBgm3; (エラーの元になってる気がしたので停止中)
-
-
+let playBgm2; //game overのbgm
 
 // 外部からの関数を呼び出しを受け止めるために
-// 関数の名前だけグローバルで宣言しておく。関数の本体はローカルの中 ↓↓
+// 関数の名前だけグローバルで宣言しておく。
+// 関数の本体はローカルの中 ↓↓
 
 /*-------------------------------------
           グローバルブロック ここまで
@@ -35,8 +32,7 @@ document.addEventListener('DOMContentLoaded',
   function () {
     'use strict';
 
-    let soundShoot01, soundShoot02;
-    let timer; // 使ってない？
+    let soundShoot01, soundShoot02; // 連射制御用
 
     let R1 = 1; // ローテーション用変数 初期値 1
     soundShoot = function () {
@@ -81,15 +77,10 @@ document.addEventListener('DOMContentLoaded',
     }
 
     playBgm1 = function () {
-
-      //document.querySelector('#bgm2').pause(); // 他を止める (機能しない エラーになる)
-      //document.querySelector('#bgm3').pause(); // 他を止める (機能しない エラーになる)
       document.querySelector('#bgm2').pause();
       bgm2.currentTime = 0;
       document.querySelector('#bgm1').volume = 1; // 0 ~ 1 で設定する。
       document.querySelector('#bgm1').play();
-      //console.log('関数 playBgm1 が呼ばれました'); // ここまでは実行される
-
     }
 
     playBgm2 = () => {
@@ -98,34 +89,6 @@ document.addEventListener('DOMContentLoaded',
       document.querySelector('#bgm2').play();
     }
 
-
-
-    // timer = setTimeout(playBgm1, 1000);
-
-
-    /*
-        playBgm2 = function () {
-          console.log('関数 playBgm2 が呼ばれました'); // ここまでは実行される
-          //document.querySelector('#bgm1').pause(); // 他を止める (機能しない エラーになる)
-          //document.querySelector('#bgm3').pause(); // 他を止める (機能しない エラーになる)
-          document.querySelector('#bgm2').volume = 0.8; // 0 ~ 1 で設定する。
-          document.querySelector('#bgm2').currentTime = 0;
-          document.querySelector('#bgm2').play();
-        }
-
->>>>>>> 224cc4387820e834ba4cadb57a2632ca26fe70eb
-    
-        
-        
-          playBgm3 = function() {
-            console.log('関数 playBgm3 が呼ばれました'); // ここまでは実行される
-            //document.querySelector('#bgm1').pause(); // 他を止める (機能しない エラーになる)
-            //document.querySelector('#bgm2').pause(); // 他を止める (機能しない エラーになる)
-            document.querySelector('#bgm3').volume = 0.8; // 0 ~ 1 で設定する。
-            document.querySelector('#bgm3').currentTime = 0;
-            document.querySelector('#bgm3').play();
-          }
-        */
 
 
 

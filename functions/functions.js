@@ -3,6 +3,15 @@
 　　　　グローバルブロックここから
 ------------------------------------*/
 
+  /*------------------------
+          関数の窓口
+   ------------------------*/        
+
+let enemySizeup; // keyBoard.js から呼び出されてる。
+  // グローバルで名前だけ宣言しておく。
+  // 本体はローカルの中 ↓↓
+
+
 /* グローバル変数・定数コーナー */
 /*---------------------------------------
       複数のjsファイルから参照されたり、
@@ -45,19 +54,33 @@
   const eScore8 = 200; // (隕石型)
   const eScore9 = 200; // (隕石型)
 
-    // for文で使うので配列に入れておく
-/*
-  let eDefaultLife = [];
 
-  for (let i = 0 ; i < enemyA_Max ; i++){
-    eDefaultLife[i] = 'eDefaultLife' + i;
-  }
-  console.log(eDefaultLife[0]); // → 「 eDefaultLife0 」...「 2 」が欲しかった・・・。
-  console.log(eDefaultLife[2]); // → 「 eDefaultLife2 」
-  console.log(eDefaultLife[4]); // → 「 eDefaultLife4 」
+  /*---- ネタ ----*/
+
+   /*---- 敵機の拡大最大値を個別設定 ----*/
+
+  const eSizeMax0 = 400; //(UFO型) 画像の横幅がこの値まで大きくなったら自機にダメージ
+  const eSizeMax1 = 400; //(UFO型)
+  const eSizeMax2 = 400; //(UFO型)
+  const eSizeMax3 = 200; //(隕石型)
+  const eSizeMax4 = 200; //(隕石型)
+  const eSizeMax5 = 200; //(隕石型)
+  const eSizeMax6 = 200; //(隕石型)
+  const eSizeMax7 = 200; //(隕石型)
+  const eSizeMax8 = 200; //(隕石型)
+  const eSizeMax9 = 200; //(隕石型)
+
+/*
+// 今のところ、敵機が横幅200pxまで大きくなったらダメージを受けるようになっているが、
+// enemySizeup(); の 「200」 を "２か所とも" → eSizeMax[i] にすれば、
+// UFO は横幅200でダメージ、隕石は横幅300でダメージ、など個別に設定できる。
+// 攻撃力、耐久力、スコアも個別設定なので、デカくなる敵を設定できる。
 */
 
-  let eDefaultLife = [ // 手動で入れておく。
+
+    // for文で使うので配列に入れておく
+
+  let eDefaultLife = [ // 手動で入れるしかないんだろうか。
   eDefaultLife0,
   eDefaultLife1,
   eDefaultLife2,
@@ -93,6 +116,18 @@
   eScore8,
   eScore9];
 
+  let eSizeMax = [
+  eSizeMax0,
+  eSizeMax1,
+  eSizeMax2,
+  eSizeMax3,
+  eSizeMax4,
+  eSizeMax5,
+  eSizeMax6,
+  eSizeMax7,
+  eSizeMax8,
+  eSizeMax9];
+
   const enemyA_Max = 10;
   // src を書き換えただけなら、耐久力・攻撃力・スコアの書き換えでOK。
   // 敵機の最大数 (htmlに設置した id の数)
@@ -103,20 +138,19 @@
   const frameHeight = 500; //px フレームの縦の長さ
   const frameWidth = 500; //px フレームの横の長さ
   // フレームの縦幅、横幅を自動的に取得するコマンドを知らないので手動で入力する。
+  // style.width とかで取得できるかも。
   // マウス移動による背景移動の限界値計算に使ってる。
   // 初期のフレームと背景の位置関係にも使ってる。
-  // 開発中にフレームの寸法が変わったなら、ここを合わせて変更する。
+  // 開発中にフレームの寸法が変わったなら、ここも変更する。
 
   let life = 100;// 自機のHP
   
-  let enemySpeed = 2;
+  let enemySpeed = 2; // 敵機の拡大の速さ
 
-  let level = 1;
+  let level = 0;
   // ゲームの段階を示す変数
   // ページロード直後 ＝ 0、
-  // ゲーム開始直後を10、点数が上がると11,12,13,...
-  // ゲームクリア ＝ 30、
-  // ゲームオーバー ＝ 40、をイメージ
+  // ゲーム開始直後に 1 、点数が上がると 2,3,4,5 が代入される。
 
   const addY = 70;
   // 照準は画面中央よりやや高め。
@@ -132,27 +166,24 @@
 
   // 出てくる敵機の種類調整
   let firstE = 0; // 配列の中の何番から何番までの敵を出現させるか、の最初の数。初期値　0
-  let lastE = 3; // 配列の中の何番から何番までのてきを出現させるか、の最後の数。初期値 3
+  let lastE = 0; // 配列の中の何番から何番までの敵を出現させるか、の最後の数。初期値 3
   /* (例)
   firstE = 0 、 lastE = 3 の場合、
-  配列の中の　0 , 1 , 2 が500x500フレーム内で動く。他は待機場所で待機
+  配列の中の　0番 , 1番 , 2番 が500x500フレーム内で動く。他は待機場所で待機
   */
-
-  let n = 0; // 背景画像の指定 初期値 0 失敗中
 
   let score = 0; // 得点
 
   let enemyA = [];
   // 敵機の要素取得用
   // function.js と mouseMove.js が共用してる。
+  // getElementById や querySelector で要素をその都度入れてる。
+  // それぞれのローカルで同名の変数を宣言しても問題ない。どちらもローカルなら。
 
-  let enemySizeA = []; // 各敵の大きさを入れておく。 function.js と mouseMove.js で使ってる。
+  let enemySizeA = [];
+  // 各敵の大きさを入れておく。 function.js と mouseMove.js で使ってる。
+  // 同一の数値を参照したいので、これはグローバルに置くのが安全。
 
-  //-------  関数の窓口 -----------
-let enemySizeup; // keyBoard.js から呼び出されてる
-  // keyboard.js から呼び出されるため、
-  // グローバルで名前だけ宣言しておく。
-  // 本体は下のほう ↓↓
 /*------------------------------------
 　　　　グローバルブロックここまで
 ------------------------------------*/
@@ -162,21 +193,22 @@ let enemySizeup; // keyBoard.js から呼び出されてる
 /*--------------------------------------
      ローカルブロックここから
     ここで宣言した変数、関数は
-他のscriptファイルからは読み込まれない。
+他の .js ファイルからは読み込まれない。
 ---------------------------------------*/
 
 document.addEventListener('DOMContentLoaded',
   function () {
     'use strict';
 
+  let timer2; // 敵機の拡大処理、自機の被ダメージ判定で使用
+
 /*------------------------------------------------
 　　　　            敵の拡大、攻撃処理
 --------------------------------------------------*/
-  let timer2; // 敵機の拡大処理、自機の被ダメージ判定で使用
 
   //function enemySize(){ // ← これはエラーになる
   //enemySizeup = function(){ // ← これは通る。
-  enemySizeup = () => { // アロー関数も通る。アロー関数が最近
+  enemySizeup = () => { // アロー関数も通る。アロー関数が最近は主流らしい。
 
     clearTimeout(timer2);
     // これがないと、敵の種類を変えるごとに拡大が加速する。
@@ -186,24 +218,23 @@ document.addEventListener('DOMContentLoaded',
       // 敵の拡大部
       //enemyA[i].width = enemySize[i] + "px";
       //enemyA[i].height = enemySize[i] + "px";
-      //console.log(enemyA[i].style.width); // この時点での大きさは200
-      //console.log(enemyA[i].style.height); // この時点での大きさは200
 
       // 拡大処理
       if (enemySizeA[i] < 200) {
+      //if (enemySizeA[i] < eSizeMax[i]) { // ネタ +++++++++++++++++++++++++++++++++++++++++++++++
         enemySizeA[i] += enemySpeed;
-        //console.log(enemySize[i]); // 25 「敵の初期配置」のときに一律20にしてあるので。
-        enemyA[i].style.width = enemySizeA[i] + "px"; // 拡大はする
-        enemyA[i].style.height = enemySizeA[i]/(enemyA[i].naturalWidth/enemyA[i].naturalHeight) + "px"; // 拡大はする
+        //console.log(enemySize[i]); //
+        enemyA[i].style.width = enemySizeA[i] + "px";
+        enemyA[i].style.height = enemySizeA[i]/(enemyA[i].naturalWidth/enemyA[i].naturalHeight) + "px";
         //console.log(enemyA[i].style.width);
         //console.log(enemyA[i].style.height);
       } // if文の閉じ ここまでは正常に機能してる
 
       // ダメージ判定部
-      if (enemySizeA[i] >= 200) {
-        life -= eAttack[i];
+      if (enemySizeA[i] >= 200) {      
+      //if (enemySizeA[i] >= eSizeMax[i]) { // ネタ ++++++++++++++++++++++++++++++++++++++++++++++
+              life -= eAttack[i];
        
-        
         if (life > 0) {
           console.log('Life : ' + life);
           document.querySelector('#life').textContent = 'Life：' + life;
@@ -220,34 +251,22 @@ document.addEventListener('DOMContentLoaded',
           document.querySelector('#bgimg0').style.display = 'none';
           document.querySelector('#targetScope0').style.display = 'none';
           playBgm2(); // audio.js の関数
-          /*
-          document.querySelector('#bgm1').pause();
-          bgm1.currentTime = 0;
-          document.querySelector('#bgm2').play();
-          */
           document.querySelector('#result').innerHTML = '最終スコア：' + score;
 
           // 全ての敵機を待機位置に。
           firstE = 0;
           lastE = 0;
           setEnemies();// mouseMove.js の関数
-
-          // 意味のない処理かも
-          /*
-          enemyA[0] = document.querySelector('#enemyA' + 0);
-          enemyA[0].style.left = -500 + 'px';
-          enemyA[0].style.top = -500 + 'px';
-          */
     
         }
-
-        // for文用の i を引数にして敵のリポップ関数を呼び出し。機能してるっぽい。
 
       } // if文の閉じ
     } // for文の閉じ
 
  /*--------------------------------------------------------------------------------------
-  要調整部分　スコアによる敵機再配置　どれくらいがゲームとしてちょうどいいのか
+
+              要調整部分　スコアによる敵機再配置　どれくらいがゲームとしてちょうどいいのか
+ 
   --------------------------------------------------------------------------------------*/
 
     /*---- スコアによる敵機の再配置 ----*/
@@ -284,15 +303,11 @@ document.addEventListener('DOMContentLoaded',
       setEnemies(); // mouseMove.js の関数
       enemySizeup(); // 拡大開始
     }
- /*--------------------------------------------------------------------------------------
- 　　　　　　　　　　　　　　なんとなくここに置いた 
- -----------------------------------------------------------------------------------*/
-
 
     timer2 = setTimeout(enemySizeup, 200);
     // console.log('関数enemySizeupが呼び出されました');
     // こいつが元凶だった・・・。
-    //setInterval なら繰り返し処理なので、処理の閉じカッコ 「 } 」 の後に配置するべき。
+    // setInterval なら繰り返し処理なので、処理の閉じカッコ 「 } 」 の後に配置するべき。
     // setTimeout は１回きりなので、全部の処理が終わる直前に入れる。
 
   } // enemySizeup の閉じ
@@ -317,70 +332,11 @@ document.addEventListener('DOMContentLoaded',
 
   ------------------------*/
 
-    //enemyA = document.querySelector("#enemyA0");
-    //console.log(enemyA.naturalWidth);
-    //console.log(enemyA.naturalHeight);
-    // 縮小表示前の本来の縦幅・横幅の取得成功
-
-    //enemyA.naturalWidth/enemyA.naturalHeight // わり算
-
-    /*
-    for(let i = 0 ; i < enemyA_Max ; i++){
-      enemyA[i] = document.querySelector("#enemyA" + i);
-      enemyA[i].width = enemySizeA[i] + 'px';
-      enemyA[i].height = enemySizeA[i]/(enemyA[i].naturalWidth/enemyA[i].naturalHeight) + 'px';
-      console.log(enemyA[i].style.width);
-      console.log(enemyA[i].style.height);
-    }
-    */
-
-
-  // 当たり判定用の式作成
-  //enemyA[i] = new Image();
-  //enemyA[i].src = document.getElementById("enemyA" + i).src;
-  // console.log(enemyA[i].width); // その敵の横幅取得
-  // console.log(enemyA[i].height); // その敵の縦幅取得
-
-  // その敵の縦・横幅(for文処理の中にあるとして)
-  // enemyA[i].width
-  // enemyA[i].height
-
-  // その敵の左上端の座標(for文処理の中にあるとして)
-  // enemyAX[i];
-  // enemyAY[i];
-  //for (let i = 0; i<enemyA_Max ; i++){
-  //console.log(enemyAX[i]);
-  //console.log(enemyAY[i]);
-  //}
-
-  // 照準の縦・横はすでに取得している。
-  // target0.width
-  // target0.height
-
-  // 画面の中央の座標
-  // frameWidth/2
-  // frameHeight/2
-
-  // 照準の左上端の座標
-  // frameWidth/2 - target0.width/2
-  // frameHeight/2 - target0.height/2 - addY // 真ん中よりやや上にある
-  //console.log(frameWidth/2 - target0.width/2);
-  //console.log(frameHeight/2 - target0.height/2 - addY);
-
-  //( ( frameWidth/2 + target0.width/2 ) >= enemyAX[i] ) // x座標当たり
-  //( enemyAX[i] + enemyA[i].width ) >=   frameWidth/2 - target0.width/2 // x座標当たり
-
-  //( frameHeight/2 - target0.height/2 - addY + target0.height ) >= enemyAY[i] // y座標当たり
-  //( enemyAY[i] + enemyA[i].height ) >= (frameHeight/2 - target0.height/2 - addY) // y座標当たり
-
-  // この段階では敵機の拡大を無視した式。
-
 /*
 
 [ 画像の大きさ、縦横比に関係なく
-　全ての画像を横幅 20px から 200px に拡大したい。
-  形がゆがんだらダメ。]
-let enemySize = 20; // という変数を宣言しているとして
+　全ての画像を横幅 10px から 200px に拡大したい。形がゆがんだらダメ。]
+let enemySize = 10; // という変数を宣言しているとして
      
 let enemyA = document.querySelector("#enemyA0"); // enemyA という、要素を格納するための変数
 console.log(enemyA.naturalWidth); // 画像の実際の横幅
@@ -388,7 +344,7 @@ console.log(enemyA.naturalHeight); // 画像の実際の縦幅
 console.log(enemyA.style.width); // 画像の表示上の横幅 ~~px 単位つき
 console.log(enemyA.style.height); // 画像の表示上の縦幅 ~~px 単位つき
 
-画像の '実際の' 横幅と縦幅でわり算をする。( 3になっても1/3になってもどちらでもよい。)
+画像の '実際の' 横幅と縦幅でわり算をする。( 3になっても1/3になってもどちらでもいい。)
 enemyA.naturalWidth/enemyA.naturalHeight
 enemyA.style.width = enemySize + 'px'; // 変数 enemySize をそのまま使える。
 enemyA.style.height = enemySize * ( enemyA.naturalWidth / enemyA.naturalHeight ) + 'px';
@@ -399,9 +355,3 @@ setTimeout( 処理や関数 , 20 ); や setInterval( 処理や関数 , 20 ); で
 大きさ、縦横比は画像毎に違っていても問題ない。
 
 */
-
-
-
-
-
-
