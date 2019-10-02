@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded',
         enemySizeup(); // function.js の関数。敵機拡大開始
 
         setTarget();// mouseMove.js の関数。照準設置
-        
+
         document.querySelector('#result').innerHTML = '';
         document.querySelector('.game__start').style.display = 'none';
         document.querySelector('#cockpit_01').style.display = 'block';
@@ -138,15 +138,15 @@ document.addEventListener('DOMContentLoaded',
 
       } else if (e.key === '8') {
 
-        // 使っていない
+        funcFreeA(); // freeSpaceA のテスト関数呼び出し
 
       } else if (e.key === '9') {
 
-        // 使っていない
+        funcFreeB(); // freeSpaceB のテスト関数呼び出し
 
       } else if (e.key === '0') {
 
-        // 使っていない
+        funcFreeC(); // freeSpaceC のテスト関数呼び出し
 
       }// if文の閉じ
 
