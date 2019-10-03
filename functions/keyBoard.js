@@ -17,9 +17,9 @@
 キー 「 2 」 : 1 普通
 キー 「 3 」 : 5 速い (これぐらいがちょうどいい？)
 
-キー 「 8 」 : 使わなくなった。
-キー 「 9 」 : 使わなくなった。
-キー 「 0 」 : 使わなくなった。
+キー 「 8 」 : 呼び出しテスト用
+キー 「 9 」 : 呼び出しテスト用
+キー 「 0 」 : 呼び出しテスト用
 
 キー 「 x 」
 画面上のマウスカーソルの可視・不可視切り替え。役に立ってない。
@@ -68,87 +68,105 @@ document.addEventListener('DOMContentLoaded',
 
     document.addEventListener('keydown', function (e) {
 
-      if (e.key === 'a') { // 開発用チートキー
+      switch (e.key) {
 
-        life = -10; // いきなりライフ-10
-        l = document.getElementById('HP');
-        l.textContent = 'HP : ' + life;
+        case 'a':
+          // 開発用チートキー
+          life = -10; // いきなりライフ-10
+          l = document.getElementById('HP');
+          l.textContent = 'HP : ' + life;
+          break;
 
-      } else if (e.key === 's') { // 開発用チートキー
+        case 's':
+          // 開発用チートキー
+          score += 1000; // スコアに1000加算
+          s = document.getElementById('score');
+          s.textContent = 'Score : ' + score;
+          break;
 
-        score += 1000; // スコアに1000加算
-        s = document.getElementById('score');
-        s.textContent = 'Score : ' + score;
+        case ' ': // 空白キー
+          shoot(); // mouseMove.js の関数呼び出し
+          break;
 
-      } else if (e.key === ' ') {
-        shoot(); // mouseMove.js の関数呼び出し
-      } else if (e.key === 'x' && mouseCursor === 'auto') { // 「x」でマウスカーソルの可視・不可視切り替え
-        document.body.style.cursor = 'none';
-        mouseCursor = 'none'
-      } else if (e.key === 'x' && mouseCursor === 'none') {
-        document.body.style.cursor = 'auto';
-        mouseCursor = 'auto' // 「x」 の処理ここまで
+        case 'x':
+          if (mouseCursor === 'auto') {
+            document.body.style.cursor = 'none';
+            mouseCursor = 'none';
+          } else {
+            document.body.style.cursor = 'auto';
+            mouseCursor = 'auto';
+          }
+          break;
 
-      } else if (e.key === 'z' && scrollrate !== 0) { // 「z」でスクロールロック
-        num = scrollrate; // 一旦別の変数に記憶させる。 0.2 , 1 , 5 のうちのどの速さでやってるか分からないので。
-        scrollrate = 0; // 動かなくする。背景・敵機・爆発画像全部が止まる。
-        z_key = 'locked'; // 「動かない」の意keyupイベントが起きたら戻す。
+        case 'z':
+          if (scrollrate !== 0) {
+            num = scrollrate; // 一旦別の変数に記憶させる。 0.2 , 1 , 5 のうちのどの速さでやってるか分からないので。
+            scrollrate = 0; // 動かなくする。背景・敵機・爆発画像全部が止まる。
+            z_key = 'locked';
+            // 戻し処理は keyupイベントで
+          }
+          break;
 
-      } else if (e.key === 'Enter') { // 「Enter」 で敵機の拡大・攻撃スタート
+        case 'Enter':
+          enemySpeed = 2;
+          life = 100;
+          document.querySelector('#life').innerHTML = 'Life : ' + life;
+          score = 0;
+          s = document.getElementById('score');
+          s.textContent = 'Score : ' + score;
 
-        enemySpeed = 2;
-        life = 100;
-        document.querySelector('#life').innerHTML = 'Life : ' + life;
-        score = 0;
-        s = document.getElementById('score');
-        s.textContent = 'Score : ' + score;
+          level = 1;
+          lvl = document.getElementById('level');
+          lvl.textContent = 'level : ' + level;
 
-        level = 1;
-        lvl = document.getElementById('level');
-        lvl.textContent = 'level : ' + level;
+          firstE = 0;
+          lastE = 3;
+          setEnemies();// mouseMove.js の関数
+          // 配列０番～２番の敵を500x500フレーム内に呼び出して拡大モードにし、他は待機させておく関数
+          enemySizeup(); // function.js の関数。敵機拡大開始
 
-        firstE = 0;
-        lastE = 3;
-        setEnemies();// mouseMove.js の関数
-        // 配列０番～２番の敵を500x500フレーム内に呼び出して拡大モードにし、他は待機させておく関数
-        enemySizeup(); // function.js の関数。敵機拡大開始
+          setTarget();// mouseMove.js の関数。照準設置
 
-        setTarget();// mouseMove.js の関数。照準設置
+          document.querySelector('#result').innerHTML = '';
+          document.querySelector('.game__start').style.display = 'none';
+          document.querySelector('#cockpit_01').style.display = 'block';
+          document.querySelector('#bgimg0').style.display = 'block';
+          document.querySelector('#score').style.display = 'block';
+          document.querySelector('#level').style.display = 'block';
+          document.querySelector('#life').style.display = 'block';
+          document.querySelector('#targetScope0').style.display = 'block';
+          document.querySelector('.game__wrapper').style.display = 'block';
+          document.querySelector('.game__over').style.display = 'none';
+          playBgm1(); // audio.js の関数呼び出し
 
-        document.querySelector('#result').innerHTML = '';
-        document.querySelector('.game__start').style.display = 'none';
-        document.querySelector('#cockpit_01').style.display = 'block';
-        document.querySelector('#bgimg0').style.display = 'block';
-        document.querySelector('#score').style.display = 'block';
-        document.querySelector('#level').style.display = 'block';
-        document.querySelector('#life').style.display = 'block';
-        document.querySelector('#targetScope0').style.display = 'block';
-        document.querySelector('.game__wrapper').style.display = 'block';
-        document.querySelector('.game__over').style.display = 'none';
-        playBgm1(); // audio.js の関数呼び出し
+          //初期化も合わせて処理しています
+          break;
 
-        //初期化も合わせて処理しています
+        case '1':
+          scrollrate = 0.2;
+          break;
 
-      } else if (e.key === '1') { // scrollrate の操作
-        scrollrate = 0.2;
-      } else if (e.key === '2') {
-        scrollrate = 1;
-      } else if (e.key === '3') {
-        scrollrate = 5; // scrollrate の処理ここまで
+        case '2':
+          scrollrate = 1;
+          break;
 
-      } else if (e.key === '8') {
+        case '3':
+          scrollrate = 5;
+          break;
 
-        funcFreeA(); // freeSpaceA のテスト関数呼び出し
+        case '8':
+          funcFreeA(); // freeSpaceA のテスト関数呼び出し
+          break;
 
-      } else if (e.key === '9') {
+        case '9':
+          funcFreeB(); // freeSpaceB のテスト関数呼び出し
+          break;
 
-        funcFreeB(); // freeSpaceB のテスト関数呼び出し
+        case '0':
+          funcFreeC(); // freeSpaceC のテスト関数呼び出し
+          break;
 
-      } else if (e.key === '0') {
-
-        funcFreeC(); // freeSpaceC のテスト関数呼び出し
-
-      }// if文の閉じ
+      } // switch文の閉じ
 
     }, false); // 'keydown'イベントの閉じ。
 
@@ -161,15 +179,27 @@ document.addEventListener('DOMContentLoaded',
     // 矢印キーの押しっぱなし移動 と ジャンプや弾発射のキー操作 が衝突して問題を起こす。
     document.addEventListener('keyup', function (e) {
 
-      if (e.key === 'z' && z_key === 'locked') {
-        scrollrate = num; // 止めるときに一旦記憶させた値をもどす
-        z_key = 'movable'; // 「動く」の意味
-      } // if文の閉じ
+      switch (e.key) {
+        case 'z':
+
+          if (z_key === 'locked') {
+            scrollrate = num; // 止めるときに一旦記憶させた値をもどす
+            z_key = 'movable'; // 「動く」の意味
+          }
+          break;
+      }
 
     }, false); // keyupイベントリスナーの閉じ
 
-
   }, false); // DOMCon... の閉じ
+
+
+/*---------------------------
+    作業スペース(ローカル)
+----------------------------*/
+
+
+
 /*-------------------------------------
           ローカルブロック ここまで
 --------------------------------------*/
