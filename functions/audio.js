@@ -35,21 +35,21 @@ document.addEventListener('DOMContentLoaded',
     let soundShoot01, soundShoot02; // 連射制御用
 
     let R1 = 1; // ローテーション用変数 初期値 1
-    soundShoot = function () {
+    soundShoot = () => {
       switch (R1) {
         case 1: soundShoot01(); break;
         case 2: soundShoot02(); break;
       } // switch の閉じ
     } // soundShoot の閉じ
 
-    soundShoot01 = function () {
+    soundShoot01 = () => {
       document.querySelector('#soundShoot01').currentTime = 0; // 音源の再生位置を 0秒目からにする。
       document.querySelector('#soundShoot01').volume = 0.5; // 割とかん高い音で耳障りだった 
       document.querySelector('#soundShoot01').play();
       R1 = 2; // 切り替え。 次にsoundShoot()を実行するときは 02 のほうが鳴る。
     }
 
-    soundShoot02 = function () {
+    soundShoot02 = () => {
       document.querySelector('#soundShoot02').currentTime = 0;
       document.querySelector('#soundShoot02').volume = 0.5; // 0 ~ 1 で設定する。
       document.querySelector('#soundShoot02').play();
@@ -57,26 +57,26 @@ document.addEventListener('DOMContentLoaded',
     }
     // id を２つぐらい用意すれば軽い連打なら対応できてると思う。
 
-    soundHit = function () {
+    soundHit = () => {
       document.querySelector('#soundHit').currentTime = 0;
       document.querySelector('#soundHit').volume = 0.4; // 0 ~ 1 で設定する。
       document.querySelector('#soundHit').play();
     }
 
     // 敵機を撃墜したときの音
-    soundDestroy = function () {
+    soundDestroy = () => {
       document.querySelector('#soundDestroy').currentTime = 0;
       document.querySelector('#soundDestroy').volume = 0.8; // 0 ~ 1 で設定する。
       document.querySelector('#soundDestroy').play();
     }
 
-    soundDamaged = function () {
+    soundDamaged = () => {
       document.querySelector('#soundDamaged').currentTime = 0;
       document.querySelector('#soundDamaged').volume = 0.8; // 0 ~ 1 で設定する。
       document.querySelector('#soundDamaged').play();
     }
 
-    playBgm1 = function () {
+    playBgm1 = () => {
       document.querySelector('#bgm2').pause();
       bgm2.currentTime = 0;
       document.querySelector('#bgm1').volume = 1; // 0 ~ 1 で設定する。
