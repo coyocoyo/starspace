@@ -18,7 +18,7 @@ let removeEnemy; // function.js から呼び出されてる。
 // ローカルにある関数の'名前だけ'グローバルで宣言しておく。
 
 /*---------------------------
-　　　　グローバルブロックここまで
+　グローバルブロックここまで
 ---------------------------*/
 
 
@@ -75,9 +75,197 @@ document.addEventListener('DOMContentLoaded',
 
     let s; // 画面表示のscore要素取得用。
 
+    /*--------------------------
+             当たり判定
+    --------------------------*/
+    // グローバルで名前だけ宣言してある関数の本定義
+    //function = shoot(){ // ← エラーになる。
+    //shoot = function(){ // ← この形は通る。
+    shoot = () => { // アロー関数も通る。関数の呼び合いが前提なら、アロー関数が主流になるのは分かる気がする。
+
+      soundShoot(); // audio.js の関数呼び出し
+
+      for (let i = firstE; i < lastE; i++) {
+        target0 = document.querySelector('#targetScope' + 0); // ページロード時のsetTarget();がなくなったので。
+        enemyA[i] = document.querySelector("#enemyA" + i);
+        //console.log(enemyA[i].style.width); // 機能してる
+        //console.log(enemyA[i].style.height); // 機能してる
+        // 元サイズではなく、その時点での縮小サイズ
+        // 小数を含む値だと比べるのに都合が悪いんだろうか？
+        // ログをよく見ると単位'px'がついてる。 ＝ 数値ではなく文字列なので、数値との大小比較はできない。
+
+        if ( // x座標の判定
+          ((frameWidth / 2 + target0.width / 2) >= enemyAX[i])
+          &&
+          (enemyAX[i] + enemySizeA[i]) >= (frameWidth / 2 - target0.width / 2)) {
+          // x座標で当たっているなら下の処理に行く。外れているならif文を抜ける。
+          if ( //y座標の判定
+            (frameHeight / 2 + target0.height / 2 - addY) >= enemyAY[i]
+            &&
+            (enemyAY[i] + enemySizeA[i] / (enemyA[i].naturalWidth / enemyA[i].naturalHeight)) >= (frameHeight / 2 - target0.height / 2 - addY)
+          ) {
+            // console.log('座標 ' + enemyAX[i] +',' + enemyAY[i] +' にて enemyA' +i +' に当たり判定');
+
+            soundHit(); // audio.jsの関数呼び出し
+            // 命中エフェクト画像を持ってくる
+            HitX = (enemyAX[i] + enemySizeA[i] / 4); // その時の敵機の座標 - ザックリ調整
+            HitY = (enemyAY[i] + enemySizeA[i] / 4); // その時の敵機の座標 - ザックリ調整
+            Hit = document.querySelector('#Hit');
+            Hit.style.left = HitX + 'px';
+            Hit.style.top = HitY + 'px';
+            stopper2 = 1; // この時だけ命中エフェクトも動く
+            timer2 = setTimeout(remove2, 200); // 0.2秒後に remove() へ
+            eRealLife[i]--; // i番の敵機の耐久力－１
+
+            if (eRealLife[i] === 0) { // もし、i番の敵機の耐久力が0ならば
+
+              // 爆発
+              soundDestroy(); // audio.jsの呼び出し
+              score += eScore[i];
+              // 敵毎にもらえる点数を個別に設定してる。
+              // enemySizeA[i]がスコープ的にまだ有効なので
+              // eScore[i] - enemySizeA[i] にすると
+              // 「 敵が小さいうちに倒すと高得点 」 にできる。
+
+              //s = document.getElementById('score');
+              //s.textContent = 'Score : ' + score + ''点;
+              //console.log(score);
+              s = document.querySelector('#score');
+              s.textContent = 'Score：' + score + '点';
+              // 爆発画像を持ってくる
+              explosionX = (enemyAX[i] - enemySizeA[i] / 2); // その時の敵機の座標 - ザックリ調整
+              explosionY = (enemyAY[i] - enemySizeA[i] / 2); // その時の敵機の座標 - ザックリ調整
+              popEnemyA(i); // i の値をそのまま引数にしてpopEnemy呼び出し
+              explosion = document.querySelector('#explosion');
+              explosion.style.left = explosionX + 'px';
+              explosion.style.top = explosionY + 'px';
+              stopper1 = 1; // この時だけ爆発も動く
+              timer1 = setTimeout(remove1, 1000); // 1秒後に remove() へ
+
+            } // if文の閉じ
+
+          } // y座標の当たり処理の閉じ。 yで外れてるならここにくる
+        } // x座標の当たり処理の閉じ。 xで外れてるならここにくる
+      } // for文の閉じ
+
+
+    } // shoot() の閉じ
+
+    /*--------------------------
+          当たり判定ここまで
+   --------------------------*/
+
+
+    /*---------------------------
+    使わない敵機を待機位置に移す
+     ---------------------------*/
+    removeEnemy = (i) => { // アロー関数
+      enemyA[i] = document.querySelector('#enemyA' + i);
+      enemyA[i].style.left = -500 + 'px';
+      enemyA[i].style.top = -500 + 'px';
+    }
+
+
+    /*-------------------------------------
+      popEnemy(i) 敵画像の500x500フレーム内配置
+    --------------------------------------*/
+    popEnemyA = (i) => {
+
+      // console.log(i); // 呼び出し元の i はスコープが切れてるが、1とか2とか正しく出る。
+
+      do {
+        Xrate = Math.floor(Math.random() * 100);
+      } while (Xrate <= 30 || Xrate >= 70);
+
+      posX = Math.floor(bgimg.width / 100 * Xrate) + bgimgX; // // x座標決定
+      enemyAX[i] = posX; // 代入 変数 i も有効のはず
+
+      do {
+        Yrate = Math.floor(Math.random() * 100);
+      } while (Yrate <= 30 || Yrate >= 70);
+
+      posY = Math.floor(bgimg.height / 100 * Yrate) + bgimgY; // y座標決定
+      enemyAY[i] = posY; // 代入 変数 i も有効のはず
+
+      enemyA[i] = document.querySelector('#enemyA' + i);
+      enemyA[i].style.left = enemyAX[i] + 'px'; // 座標代入 この瞬間に敵機がワープする
+      enemyA[i].style.top = enemyAY[i] + 'px'; // 座標代入 この瞬間に敵機がワープする
+      //---------------------------------------------------------------------------------
+      enemySizeA[i] = 10; // 暫定的な設置なので要注意。 CSSでは10設定だった。
+      //---------------------------------------------------------------------------------
+      enemyA[i].style.width = enemySizeA[i] + 'px';
+      enemyA[i].style.height = enemySizeA[i] / (enemyA[i].naturalWidth / enemyA[i].naturalHeight) + 'px';
+      //console.log(enemyA[i].style.width);
+      //console.log(enemyA[i].style.height);
+
+      eRealLife[i] = eDefaultLife[i];
+      // 残り耐久力に初期値を代入。
+      // 値だけが代入される。
+      // Real が引き算されても Default は引き算されないらしい。
+      // 参照を共有してるわけではないっぽい。
+
+    } // PopEnemyA の閉じ
+
+    /*----------------------------------------------------------
+              背景画像の真ん中をframeの真ん中に配置する。
+    -----------------------------------------------------------*/
+    setBgimg = () => {
+      bgimg = new Image();
+      bgimg.src = document.getElementById('bgimg' + 0).src;
+      //console.log(bgimg.height); // 背景画像の縦幅
+      //console.log(bgimg.width); // 背景画像の横幅
+
+      // 背景画像の真ん中とフレームの真ん中を合わせた状態での
+      // 背景画像の左上端の座標
+      bgimgX = (frameWidth / 2) - (bgimg.width / 2);
+      bgimgY = (frameHeight / 2) - (bgimg.height / 2);
+
+      document.querySelector('#bgimg' + 0).style.left = bgimgX + 'px';
+      document.querySelector('#bgimg' + 0).style.top = bgimgY + 'px';
+      /*-- 真ん中処理ここまで --*/
+    }
+
+    /*--------------------------
+            照準位置決定
+        真ん中のやや上に配置する。
+    ----------------------------*/
+    setTarget = () => {
+      target0 = new Image();
+      target0.src = document.getElementById('targetScope' + 0).src;
+      //console.log(target0.height); // 照準画像の縦幅
+      //console.log(target0.width); // 照準画像の横幅
+
+      target0X = (frameWidth / 2) - (target0.width / 2);
+      target0Y = (frameHeight / 2) - (target0.height / 2);
+
+      document.querySelector('#targetScope' + 0).style.left = target0X + 'px';
+      document.querySelector('#targetScope' + 0).style.top = (target0Y - addY) + 'px';
+      /*------ 照準位置決定ここまで ------*/
+    }
+
+
+
+    /*-----------------------
+     敵機の初期配置、更新配置
+     -----------------------*/
+    setEnemies = () => {
+      for (let i = 0; i < firstE; i++) {
+        removeEnemy(i);
+      } // for文の閉じ
+
+      for (let i = firstE; i < lastE; i++) {
+        popEnemyA(i);
+      } // for文の閉じ
+
+      for (let i = lastE; i < enemyA_Max; i++) {
+        removeEnemy(i);
+      } // for文の閉じ
+    } // setEnemies の閉じ
+
+
     /*-------------------------------------
                 マウス移動イベント
-    --------------------------------------*/
+     -------------------------------------*/
     // マウスが1ピクセルでも動いたら呼び出される処理
     // ここより下は１秒間に50回以上の速さで繰り返される。
     document.onmousemove = function (e) {
@@ -169,89 +357,10 @@ document.addEventListener('DOMContentLoaded',
 
     }; // onmousemoveの閉じ 高速で繰り返される処理ここまで
 
-    /*--------------------------
-             当たり判定
-    --------------------------*/
-    // グローバルで名前だけ宣言してある関数の本定義
-    //function = shoot(){ // ← エラーになる。
-    //shoot = function(){ // ← この形は通る。
-    shoot = () => { // アロー関数も通る。アロー関数が今の主流だとか。
-
-      soundShoot(); // audio.js の関数呼び出し
-
-      for (let i = firstE; i < lastE; i++) {
-        target0 = document.querySelector('#targetScope' + 0); // ページロード時のsetTarget();がなくなったので。
-        enemyA[i] = document.querySelector("#enemyA" + i);
-        //console.log(enemyA[i].style.width); // 機能してる
-        //console.log(enemyA[i].style.height); // 機能してる
-        // 元サイズではなく、その時点での縮小サイズ
-        // 小数を含む値だと比べるのに都合が悪いんだろうか？
-        // ログをよく見ると単位'px'がついてる。 ＝ 数値ではなく文字列なので、数値との大小比較はできない。
-
-        if ( // x座標の判定
-          ((frameWidth / 2 + target0.width / 2) >= enemyAX[i])
-          &&
-          (enemyAX[i] + enemySizeA[i]) >= (frameWidth / 2 - target0.width / 2)) {
-          // x座標で当たっているなら下の処理に行く。外れているならif文を抜ける。
-          if ( //y座標の判定
-            (frameHeight / 2 + target0.height / 2 - addY) >= enemyAY[i]
-            &&
-            (enemyAY[i] + enemySizeA[i] / (enemyA[i].naturalWidth / enemyA[i].naturalHeight)) >= (frameHeight / 2 - target0.height / 2 - addY)
-          ) {
-            // console.log('座標 ' + enemyAX[i] +',' + enemyAY[i] +' にて enemyA' +i +' に当たり判定');
-
-            soundHit(); // audio.jsの関数呼び出し
-            // 命中エフェクト画像を持ってくる
-            HitX = (enemyAX[i] + enemySizeA[i] / 4); // その時の敵機の座標 - ザックリ調整
-            HitY = (enemyAY[i] + enemySizeA[i] / 4); // その時の敵機の座標 - ザックリ調整
-            Hit = document.querySelector('#Hit');
-            Hit.style.left = HitX + 'px';
-            Hit.style.top = HitY + 'px';
-            stopper2 = 1; // この時だけ命中エフェクトも動く
-            timer2 = setTimeout(remove2, 200); // 0.2秒後に remove() へ
-            eRealLife[i]--; // i番の敵機の耐久力－１
-
-            if (eRealLife[i] === 0) { // もし、i番の敵機の耐久力が0ならば
-
-              // 爆発
-              soundDestroy(); // audio.jsの呼び出し
-              score += eScore[i];
-              // 敵毎にもらえる点数を個別に設定してる。
-              // enemySizeA[i]がスコープ的にまだ有効なので
-              // eScore[i] - enemySizeA[i] にすると
-              // 「 敵が小さいうちに倒すと高得点 」 にできる。
-              　
-              //s = document.getElementById('score');
-              //s.textContent = 'Score : ' + score + ''点;
-              //console.log(score);
-              s = document.querySelector('#score');
-              s.textContent = 'Score：' + score + '点';
-              // 爆発画像を持ってくる
-              explosionX = (enemyAX[i] - enemySizeA[i] / 2); // その時の敵機の座標 - ザックリ調整
-              explosionY = (enemyAY[i] - enemySizeA[i] / 2); // その時の敵機の座標 - ザックリ調整
-              popEnemyA(i); // i の値をそのまま引数にしてpopEnemy呼び出し
-              explosion = document.querySelector('#explosion');
-              explosion.style.left = explosionX + 'px';
-              explosion.style.top = explosionY + 'px';
-              stopper1 = 1; // この時だけ爆発も動く
-              timer1 = setTimeout(remove1, 1000); // 1秒後に remove() へ
-
-            } // if文の閉じ
-
-          } // y座標の当たり処理の閉じ。 yで外れてるならここにくる
-        } // x座標の当たり処理の閉じ。 xで外れてるならここにくる
-      } // for文の閉じ
-
-
-    } // shoot() の閉じ
-
-    /*--------------------------
-          当たり判定ここまで
-   --------------------------*/
 
     /*--------------------------------------
-            マウスクリック
-     ---------------------------------------*/
+           マウスクリック
+   ---------------------------------------*/
 
     document.addEventListener('click', shoot, false);
     // これだけ。　
@@ -260,18 +369,9 @@ document.addEventListener('DOMContentLoaded',
            マウスクリック ここまで
    ---------------------------------------*/
 
-    /*---使わない敵機を待機位置に移す
-     ----*/
-    removeEnemy = (i) => { // アロー関数
-      enemyA[i] = document.querySelector('#enemyA' + i);
-      enemyA[i].style.left = -500 + 'px';
-      enemyA[i].style.top = -500 + 'px';
-    }
-    /*----
-   ------*/
-
-    /*----爆発画像を待機位置に移す
-     -------*/
+    /*-----------------------
+    爆発画像を待機位置に移す
+     -----------------------*/
     function remove1() {
       stopper1 = 0; // 爆発を動かなくする
       explosionX = -500; // 画面外に逃がす
@@ -281,11 +381,10 @@ document.addEventListener('DOMContentLoaded',
       explosion.style.top = explosionY + 'px';
     } // remove1 の閉じ
 
-    /*-----
-  --------*/
 
-    /*----命中画像を待機位置に移す
-     -------*/
+    /*-----------------------
+    命中画像を待機位置に移す
+     -----------------------*/
     function remove2() {
       stopper2 = 0; // 命中を動かなくする
       HitX = -500; // 画面外に逃がす
@@ -294,106 +393,7 @@ document.addEventListener('DOMContentLoaded',
       Hit.style.left = HitX + 'px';
       Hit.style.top = HitY + 'px';
     } // remove2 の閉じ
-    /*--------
-   --------*/
 
-
-    /*-------------------------------------
-      popEnemy(i) 敵画像の500x500フレーム内配置
-    --------------------------------------*/
-    popEnemyA = function (i) {
-
-      // console.log(i); // 呼び出し元の i はスコープが切れてるが、1とか2とか正しく出る。
-
-      do {
-        Xrate = Math.floor(Math.random() * 100);
-      } while (Xrate <= 30 || Xrate >= 70);
-
-      posX = Math.floor(bgimg.width / 100 * Xrate) + bgimgX; // // x座標決定
-      enemyAX[i] = posX; // 代入 変数 i も有効のはず
-
-      do {
-        Yrate = Math.floor(Math.random() * 100);
-      } while (Yrate <= 30 || Yrate >= 70);
-
-      posY = Math.floor(bgimg.height / 100 * Yrate) + bgimgY; // y座標決定
-      enemyAY[i] = posY; // 代入 変数 i も有効のはず
-
-      enemyA[i] = document.querySelector('#enemyA' + i);
-      enemyA[i].style.left = enemyAX[i] + 'px'; // 座標代入 この瞬間に敵機がワープする
-      enemyA[i].style.top = enemyAY[i] + 'px'; // 座標代入 この瞬間に敵機がワープする
-      //---------------------------------------------------------------------------------
-      enemySizeA[i] = 10; // 暫定的な設置なので要注意。 CSSでは10設定だった。
-      //---------------------------------------------------------------------------------
-      enemyA[i].style.width = enemySizeA[i] + 'px';
-      enemyA[i].style.height = enemySizeA[i] / (enemyA[i].naturalWidth / enemyA[i].naturalHeight) + 'px';
-      //console.log(enemyA[i].style.width);
-      //console.log(enemyA[i].style.height);
-
-      eRealLife[i] = eDefaultLife[i];
-      // 残り耐久力に初期値を代入。
-      // 値だけが代入される。
-      // Real が引き算されても Default は引き算されないらしい。
-      // 参照を共有してるわけではないっぽい。
-
-    } // PopEnemyA の閉じ
-
-    /*----------------------------------------------------------
-              背景画像の真ん中をframeの真ん中に配置する。
-    -----------------------------------------------------------*/
-    setBgimg = function () {
-      bgimg = new Image();
-      bgimg.src = document.getElementById('bgimg' + 0).src;
-      //console.log(bgimg.height); // 背景画像の縦幅
-      //console.log(bgimg.width); // 背景画像の横幅
-
-      // 背景画像の真ん中とフレームの真ん中を合わせた状態での
-      // 背景画像の左上端の座標
-      bgimgX = (frameWidth / 2) - (bgimg.width / 2);
-      bgimgY = (frameHeight / 2) - (bgimg.height / 2);
-
-      document.querySelector('#bgimg' + 0).style.left = bgimgX + 'px';
-      document.querySelector('#bgimg' + 0).style.top = bgimgY + 'px';
-      /*-- 真ん中処理ここまで --*/
-    }
-
-    /*--------------------------
-            照準位置決定
-        真ん中のやや上に配置する。
-    ----------------------------*/
-    setTarget = () => {
-      target0 = new Image();
-      target0.src = document.getElementById('targetScope' + 0).src;
-      //console.log(target0.height); // 照準画像の縦幅
-      //console.log(target0.width); // 照準画像の横幅
-
-      target0X = (frameWidth / 2) - (target0.width / 2);
-      target0Y = (frameHeight / 2) - (target0.height / 2);
-
-      document.querySelector('#targetScope' + 0).style.left = target0X + 'px';
-      document.querySelector('#targetScope' + 0).style.top = (target0Y - addY) + 'px';
-      /*------ 照準位置決定ここまで ------*/
-    }
-
-
-
-    /*----敵機の初期配置、更新配置
-     -----*/
-    setEnemies = function () {
-      for (let i = 0; i < firstE; i++) {
-        removeEnemy(i);
-      } // for文の閉じ
-
-      for (let i = firstE; i < lastE; i++) {
-        popEnemyA(i);
-      } // for文の閉じ
-
-      for (let i = lastE; i < enemyA_Max; i++) {
-        removeEnemy(i);
-      } // for文の閉じ
-    } // setEnemies の閉じ
-    /*-------------
-    -------------*/
 
     setBgimg(); // 1回のページリロードにつき1回だけの処理 id=bgimg0 の背景画像を呼び出している。
 
@@ -489,7 +489,7 @@ x同士、y同士の引き算を行う。
 
       for (let i = lastE ; i < enemyA_Max ; i++) {
                   ( = 5 )        ( = 10 )
-                  
+
         removeEnemy(i);
         // i番の敵機を待機場所に移す関数
 
